@@ -20,12 +20,12 @@
         <div class="collapse" id="base">
             <ul class="nav nav-collapse">
                 <li>
-                    <a href="/brgMasuk">
+                    <a href="/barang_masuk">
                         <span class="sub-item">Barang Masuk</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/brgKeluar">
+                    <a href="/barang_keluar">
                         <span class="sub-item">Barang Keluar</span>
                     </a>
                 </li>

@@ -6,7 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BarangmasukController;
+use App\Http\Controllers\BarangkeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,16 @@ Route::middleware(['auth', 'user-access:gudang'])->group(function () {
   
     // Route::get('/super-admin/home', [HomeController::class, 'gudang'])->name('gudang');
     Route::get('/gudang', [HomeController::class, 'gudang'])->name('gudang');
+
+    // Transaki Data Barang Masuk
+    Route::get('/barang_masuk', [BarangmasukController::class, 'index']);
+    Route::get('/barang_masuk/ajax', [BarangmasukController::class, 'ajax']);
+    Route::get('/barang_masuk/create', [BarangmasukController::class, 'create']);
+    Route::post('/barang_masuk/store', [BarangmasukController::class, 'store']);
+    
+    // Transaki Data Barang Keluar
+    Route::get('/barang_keluar', [BarangkeluarController::class, 'index']);
+    Route::get('/barang_keluar/create', [BarangkeluarController::class, 'create']);
+    Route::post('/barang_keluar/store', [BarangkeluarController::class, 'store']);
 });
   
