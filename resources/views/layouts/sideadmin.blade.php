@@ -46,18 +46,28 @@
         <div class="collapse" id="laporan">
             <ul class="nav nav-collapse">
                 <li>
-                    <a href="/barangMasuk">
-                        <span class="sub-item">Barang Masuk</span>
+                    <a href="/laporan_user">
+                        <span class="sub-item">Laporan Data user</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/barangKeluar">
-                        <span class="sub-item">Barang Keluar</span>
+                    <a href="/laporan_barang">
+                        <span class="sub-item">Laporan Data Barang</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/laporan">
-                        <span class="sub-item">Laporan</span>
+                    <a href="/laporan_kategori">
+                        <span class="sub-item">Laporan Data Kategori</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/laporan_masuk">
+                        <span class="sub-item">Laporan Barang Masuk</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/laporan_keluar">
+                        <span class="sub-item">Laporan Barang Keluar</span>
                     </a>
                 </li>
             </ul>

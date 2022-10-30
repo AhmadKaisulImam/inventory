@@ -5,7 +5,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Tambah Data Barang Masuk</h4>
+                <h4 class="page-title">Tambah Data Barang Keluar</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
@@ -22,7 +22,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Barang Masuk</a>
+                        <a href="#">Barang Keluar</a>
                     </li>
                 </ul>
             </div>
@@ -30,19 +30,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Masukan Data Barang Masuk</div>
+                            <div class="card-title">Masukan Data Barang Keluar</div>
                         </div>
-                        <form method="POST" enctype="multipart/form-data" action="/barang_masuk/store">
+                        <form method="POST" enctype="multipart/form-data" action="/barang_keluar/store">
                         @csrf
                         <div class="card-body">
                             <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
                             <div class="form-group">
-                                <label>No Barang Masuk</label>
-                                <input type="text" class="form-control" name="no_barang_masuk" value="{{ 'NBM-'.date('d-m-Y').'-'.$kd }}" readonly required>
+                                <label>No Barang Keluar</label>
+                                <input type="text" class="form-control" name="no_barang_keluar" value="{{ 'NBK-'.date('d-m-Y').'-'.$kd }}" required>
                             </div>
                             <div class="form-group">
-                                <label>Tanggal Masuk</label>
-                                <input type="date" class="form-control" name="tgl_barang_masuk" placeholder="Tanggal Barang Masuk . . ." required>
+                                <label>Tanggal Keluar</label>
+                                <input type="date" class="form-control" name="tgl_barang_keluar" placeholder="No Barang Keluar . . ." required>
                             </div>
                             <div class="form-group">
                                 <label>Nama Barang</label>
@@ -55,9 +55,9 @@
                             </div>
                             <div id="detail_barang"></div>
                             <div class="form-group">
-                                <label>Jumlah Barang Masuk</label>
+                                <label>Jumlah Barang Keluar</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" required>
+                                    <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_keluar" name="jml_barang_keluar" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">Unit</span>
                                     </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="card-action">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="/barang_masuk" class="btn btn-danger"><i class="fa fa-undo"></i> Kembali</a>
+                                <a href="/barang_keluar" class="btn btn-danger"><i class="fa fa-undo"></i> Kembali</a>
                             </div>
                         </div>
                         </form>
@@ -89,10 +89,10 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#jml_barang_masuk").keyup(function() {
-            var jml_barang_masuk   = $("#jml_barang_masuk").val();
+        $("#jml_barang_keluar").keyup(function() {
+            var jml_barang_keluar   = $("#jml_barang_keluar").val();
             var harga              = $("#harga").val();
-            var total              = parseInt(harga) * parseInt(jml_barang_masuk);
+            var total              = parseInt(harga) * parseInt(jml_barang_keluar);
             $("#total").val(total);
         })
     })
@@ -111,7 +111,7 @@
         var id_barang = $("#id_barang").val();
         $.ajax({
             type    : "GET",
-            url     : "/barang_masuk/ajax",
+            url     : "/barang_keluar/ajax",
             data    : "id_barang="+id_barang,
             cache   : false,
             success : function(data){

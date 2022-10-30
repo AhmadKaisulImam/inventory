@@ -9,14 +9,13 @@ class Barangkeluar extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $table = 'brg_keluar';
 
     protected $fillable = [
         'no_barang_keluar',
         'id_barang',
         'id_user',
+        'tgl_barang_keluar',
         'jml_barang_keluar',
         'total',
         'created_at',

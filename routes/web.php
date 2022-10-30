@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangmasukController;
 use App\Http\Controllers\BarangkeluarController;
@@ -51,6 +52,23 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/kategori/store', [CategoryController::class, 'store']);
     Route::post('/kategori/{id}/update', [CategoryController::class, 'update']);
     Route::get('/kategori/{id}/destroy', [CategoryController::class, 'destroy']);
+    
+    // Laporan
+    Route::get('/laporan_user', [LaporanController::class, 'laporan_user']);
+    Route::get('/laporan_user/print_user', [LaporanController::class, 'print_user']);
+    
+    Route::get('/laporan_barang', [LaporanController::class, 'laporan_barang']);
+    Route::get('/laporan_barang/print_barang', [LaporanController::class, 'print_barang']);
+    
+    Route::get('/laporan_kategori', [LaporanController::class, 'laporan_kategori']);
+    Route::get('/laporan_kategori/print_kategori', [LaporanController::class, 'print_kategori']);
+    
+    Route::get('/laporan_masuk', [LaporanController::class, 'laporan_masuk']);
+    Route::get('/laporan_masuk/print_masuk', [LaporanController::class, 'print_masuk']);
+    
+    Route::get('/laporan_keluar', [LaporanController::class, 'laporan_keluar']);
+    Route::get('/laporan_keluar/print_keluar', [LaporanController::class, 'print_keluar']);
+    
 });
   
 // route gudang
@@ -67,6 +85,7 @@ Route::middleware(['auth', 'user-access:gudang'])->group(function () {
     
     // Transaki Data Barang Keluar
     Route::get('/barang_keluar', [BarangkeluarController::class, 'index']);
+    Route::get('/barang_keluar/ajax', [BarangkeluarController::class, 'ajax']);
     Route::get('/barang_keluar/create', [BarangkeluarController::class, 'create']);
     Route::post('/barang_keluar/store', [BarangkeluarController::class, 'store']);
 });

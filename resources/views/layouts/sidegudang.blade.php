@@ -11,25 +11,16 @@
         </span>
         <h4 class="text-section">Menu</h4>
     </li>
-    <li class="nav-item">
-        <a data-toggle="collapse" href="#base">
-            <i class="fas fa-layer-group"></i>
-            <p>Transaksi</p>
-            <span class="caret"></span>
+    <li class="nav-item {{ Request::is('barang_masuk') ? 'active' : '' }} {{ Request::is('barang_masuk/create') ? 'active' : '' }}">
+        <a href="/barang_masuk">
+            <i class="fas fa-file"></i>
+            <p>Barang Masuk</p>
         </a>
-        <div class="collapse" id="base">
-            <ul class="nav nav-collapse">
-                <li>
-                    <a href="/barang_masuk">
-                        <span class="sub-item">Barang Masuk</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/barang_keluar">
-                        <span class="sub-item">Barang Keluar</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+    </li>
+    <li class="nav-item {{ Request::is('barang_keluar') ? 'active' : '' }} {{ Request::is('barang_keluar') ? 'active' : '' }}">
+        <a href="/barang_keluar">
+            <i class="fas fa-file"></i>
+            <p>Barang Keluar</p>
+        </a>
     </li>
 </ul>

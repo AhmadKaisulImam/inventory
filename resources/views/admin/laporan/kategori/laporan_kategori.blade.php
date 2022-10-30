@@ -6,13 +6,13 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Transaksi</h4>
+                <h4 class="page-title">Laporan Data Kategori</h4>
                 <ul class="breadcrumbs">
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Barang Keluar</a>
+                        <a href="#">Data Kategori</a>
                     </li>
                 </ul>
             </div>
@@ -21,10 +21,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Barang Keluar</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="/barang_keluar/create">
-                                    <i class="fa fa-plus"></i>
-                                    Tambah Barang Keluar
+                                <h4 class="card-title">Data Kategori</h4>
+                                <a href="/laporan_kategori/print_kategori" class="btn btn-primary btn-round ml-auto" target="_blank">
+                                    <i class="fa fa-print"></i>
+                                    Cetak Kategori
                                 </a>
                             </div>
                         </div>
@@ -34,26 +34,14 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No Barang Keluar</th>
-                                            <th>Name Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Tanggal Keluar</th>
-                                            <th>Harga</th>
-                                            <th>Jumlah</th>
-                                            <th>Total</th>
+                                            <th>Nama kategori</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($barang_keluar as $b)
+                                        @foreach ($kategori as $u)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $b->no_barang_keluar }}</td>
-                                            <td>{{ $b->nama_barang }}</td>
-                                            <td>{{ $b->nama_kategori }}</td>
-                                            <td>{{ date('d F Y', strtotime($b->tgl_barang_keluar)) }}</td>
-                                            <td>Rp. {{ number_format($b->harga) }}</td>
-                                            <td>{{ $b->jml_barang_keluar }} Unit</td>
-                                            <td>Rp. {{ number_format($b->total) }}</td>
+                                            <td>{{ $u->nama_kategori }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -66,5 +54,4 @@
         </div>
     </div>
 </div>
-
 @endsection

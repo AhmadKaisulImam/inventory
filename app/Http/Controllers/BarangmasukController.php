@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Barangmasuk;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -28,7 +29,22 @@ class BarangmasukController extends Controller
     {
         $barang     = Barang::all();
 
-        return view('gudang.transaksi.brg_masuk.add', compact('barang'));
+        $q     = DB::table('brg_masuk')->select(DB::raw('MAX(RIGHT(no_barang_masuk,4)) as kode'));
+        $kd       = "";
+        if($q->count()>0)
+        {
+            foreach($q->get() as $k)
+            {
+                $tmp    = ((int)$k->kode)+1;
+                $kd   = sprintf("$04s", $tmp);
+            }
+        }
+        else
+        {
+            $kd   = "0001";
+        }
+
+        return view('gudang.transaksi.brg_masuk.add', compact('barang','kd'));
     }
 
     public function ajax(Request $request)
@@ -45,6 +61,7 @@ class BarangmasukController extends Controller
             'no_barang_masuk'   => $request->no_barang_masuk,
             'id_barang'         => $request->id_barang,
             'id_user'           => $request->id_user,
+            'tgl_barang_masuk'  => $request->tgl_barang_masuk,
             'jml_barang_masuk'  => $request->jml_barang_masuk,
             'total'             => $request->total,
             'created_at'        => date('Y-m-d H:i:s'),
