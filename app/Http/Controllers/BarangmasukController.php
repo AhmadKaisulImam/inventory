@@ -36,7 +36,7 @@ class BarangmasukController extends Controller
             foreach($q->get() as $k)
             {
                 $tmp    = ((int)$k->kode)+1;
-                $kd   = sprintf("$04s", $tmp);
+                $kd   = sprintf("%04s", $tmp);
             }
         }
         else

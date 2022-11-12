@@ -36,13 +36,15 @@
                         @csrf
                         <div class="card-body">
                             <input type="hidden" name="id_user" value="{{ auth()->user()->id }}">
-                            <div class="form-group">
-                                <label>No Barang Masuk</label>
-                                <input type="text" class="form-control" name="no_barang_masuk" value="{{ 'NBM-'.date('d-m-Y').'-'.$kd }}" readonly required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Masuk</label>
-                                <input type="date" class="form-control" name="tgl_barang_masuk" placeholder="Tanggal Barang Masuk . . ." required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>No Barang Masuk</label>
+                                    <input type="text" class="form-control" name="no_barang_masuk" value="{{ 'NBM-'.$kd }}" readonly required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="tgl">Tanggal Masuk</label>
+                                    <input type="date" id="tgl" class="form-control" name="tgl_barang_masuk" placeholder="Tanggal Barang Masuk . . ." required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Nama Barang</label>
@@ -54,22 +56,24 @@
                                 </select>
                             </div>
                             <div id="detail_barang"></div>
-                            <div class="form-group">
-                                <label>Jumlah Barang Masuk</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" required>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">Unit</span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Jumlah Barang Masuk</label>
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2">Unit</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Total</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                <div class="col-md-6">
+                                    <label>Total</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                        </div>
+                                        <input type="number" class="form-control" placeholder="Total . . ." id="total" name="total" readonly required>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="Total . . ." id="total" name="total" readonly required>
                                 </div>
                             </div>
                             <div class="card-action">

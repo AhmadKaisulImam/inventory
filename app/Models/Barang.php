@@ -20,6 +20,11 @@ class Barang extends Model
         'updated_at',
     ];
 
+    public function category()
+    {
+        
+    }
+
     const CREARED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 }

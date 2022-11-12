@@ -21,7 +21,8 @@
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/assets/css/azzara.min.css">
+	<link rel="stylesheet" href="/assets/css/azzara.css">
+	{{-- <link rel="stylesheet" href="/assets/css/azzara.min.css"> --}}
 
 </head>
 <body>

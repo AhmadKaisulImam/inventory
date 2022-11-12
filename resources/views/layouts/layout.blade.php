@@ -18,23 +18,24 @@
 		});
 	</script>
 
+	{{-- font awesome --}}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/assets/css/azzara.min.css">
-	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link rel="stylesheet" href="/assets/css/demo.css">
+	{{-- <link rel="stylesheet" href="/assets/css/azzara.min.css"> --}}
+	<link rel="stylesheet" href="/assets/css/azzara.css">
 </head>
 <body>
 	<div class="wrapper">
 		<!--
 				Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
 		-->
-		<div class="main-header" data-background-color="purple">
+		<div class="main-header" data-background-color="blue">
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
 				<a href="#" class="logo">
-					<img src="/assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
+					<img src="" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
