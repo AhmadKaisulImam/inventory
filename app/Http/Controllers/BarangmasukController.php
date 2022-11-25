@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Barangmasuk;
 use App\Models\Category;
+use App\Models\Supplier;
+use App\Models\Barangmasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,28 +15,27 @@ class BarangmasukController extends Controller
 {
     public function index()
     {
-        $barang_masuk   =   Barangmasuk::join('barang', 'barang.id', '=', 'brg_masuk.id_barang')
-                        ->  join('kategori', 'kategori.id', '=', 'barang.id_kategori')
-                        ->  select('brg_masuk.*', 'kategori.nama_kategori', 'barang.harga', 'barang.nama_barang')
-                        ->  get();
+        $barang_masuk   = Barangmasuk::all();
+        $kategori       = Category::all();
+        $barang         = Barang::all();
+        $supplier       = Supplier::all();
 
-        // $barang         = Barang::all();
-
-        return view('gudang.transaksi.brg_masuk.brg_masuk', compact('barang_masuk'));
+        return view('gudang.transaksi.brg_masuk.brg_masuk', compact('barang_masuk','kategori','barang','supplier'));
         
     }
 
     public function create()
     {
-        $barang     = Barang::all();
+        $barang    = Barang::all();
+        $supplier  = Supplier::all();
 
-        $q     = DB::table('brg_masuk')->select(DB::raw('MAX(RIGHT(no_barang_masuk,4)) as kode'));
+        $q        = DB::table('barang_masuk')->select(DB::raw('MAX(RIGHT(no_barang_masuk,4)) as kode'));
         $kd       = "";
         if($q->count()>0)
         {
             foreach($q->get() as $k)
             {
-                $tmp    = ((int)$k->kode)+1;
+                $tmp  = ((int)$k->kode)+1;
                 $kd   = sprintf("%04s", $tmp);
             }
         }
@@ -44,7 +44,7 @@ class BarangmasukController extends Controller
             $kd   = "0001";
         }
 
-        return view('gudang.transaksi.brg_masuk.add', compact('barang','kd'));
+        return view('gudang.transaksi.brg_masuk.add', compact('barang','kd','supplier'));
     }
 
     public function ajax(Request $request)
@@ -59,8 +59,8 @@ class BarangmasukController extends Controller
     {
         Barangmasuk::create([
             'no_barang_masuk'   => $request->no_barang_masuk,
-            'id_barang'         => $request->id_barang,
-            'id_user'           => $request->id_user,
+            'supplier_id'       => $request->supplier_id,
+            'barang_id'         => $request->barang_id,
             'tgl_barang_masuk'  => $request->tgl_barang_masuk,
             'jml_barang_masuk'  => $request->jml_barang_masuk,
             'total'             => $request->total,
@@ -68,13 +68,23 @@ class BarangmasukController extends Controller
             'updated_at'        => date('Y-m-d H:i:s'),
         ]);
 
-        $barang = Barang::find($request->id_barang);
+        $barang = Barang::find($request->barang_id);
 
         $barang->stok  += $request->jml_barang_masuk;
         $barang->save();
 
-        // alert()->success('Berhasil','Data Berhasil Ditambahkan');
-        toast('Data Berhasil Dimasukan', 'success');
+        // toast('Data Berhasil Dimasukan', 'success');
+        alert()->success('Berhasil','Data Telah Ditambahkan');
+        return redirect('/barang_masuk');
+    }
+
+    public function destroy($id)
+    {
+        $barang_masuk = Barangmasuk::find($id);
+ 
+        $barang_masuk->delete();
+
+        alert()->info('Info','Data Telah Dihapus');
         return redirect('/barang_masuk');
     }
 }

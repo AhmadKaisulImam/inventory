@@ -28,15 +28,15 @@
 <body>
 	<div class="wrapper">
 		<!--
-			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+			"blue | purple | light-blue | green | orange | red"
 		-->
 		<div class="main-header" data-background-color="blue">
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
-				<a href="/home" class="title text-white">
-                    <h2>Inventory Barang</h2>
-				</a>
+				<a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
+                    <img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+                </a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
 						<i class="fa fa-bars"></i>

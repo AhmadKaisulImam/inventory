@@ -34,23 +34,21 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Harga Beli</th>
-                                            <th>Harga Jual</th>
-                                            <th>Stok</th>
+                                            <th>Name Supplier</th>
+                                            <th>Alamat</th>
+                                            <th>Nomor Telepon</th>
+                                            <th>Email</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($barang as $u)
+                                        @foreach ($supplier as $u)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $u->nama_barang }}</td>
-                                            <td>{{ $u->category->nama_kategori }}</td>
-                                            <td>Rp. {{ number_format($u->harga_beli) }}</td>
-                                            <td>Rp. {{ number_format($u->harga_jual) }}</td>
-                                            <td>{{ $u->stok }} Unit</td>
+                                            <td>{{ $u->nama_supplier }}</td>
+                                            <td>{{ $u->alamat }}</td>
+                                            <td>{{ $u->nomor_telp }}</td>
+                                            <td>{{ $u->email }}</td>
                                             <td>
                                                 <a href="#editBarang{{ $u->id }}" data-toggle="modal" class="btn btn-primary btn-xs">
                                                     <i class="fa fa-edit"></i>
@@ -85,50 +83,26 @@
                 </button>
             </div>
 
-            <form method="POST" enctype="multipart/form-data" action="/barang/store">
+            <form method="POST" enctype="multipart/form-data" action="/supplier/store">
             @csrf
 
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label>Nama Barang</label>
-                    <input type="text" name="nama_barang" class="form-control" required autocomplete="off" placeholder="Masukan Nama Barang. . . ">
+                    <label>Nama Supplier</label>
+                    <input type="text" name="nama_supplier" class="form-control" required autocomplete="off" placeholder="Masukan Nama Supplier. . . ">
                 </div>
                 <div class="form-group">
-                    <label>Kategori</label>
-                    <select name="kategori" class="form-control form-control-lg">
-                        <option value="" hidden>-- Pilih Kategori --</option>
-                        @foreach ($kategori as $k)
-                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                        @endforeach
-                    </select>
+                    <label>Alamat</label>
+                    <input type="text" name="alamat" class="form-control" required autocomplete="off" placeholder="Masukan Alamat. . . ">
                 </div>
                 <div class="form-group">
-                    <label>Harga Beli</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Rp. </span>
-                        </div>
-                        <input type="number" class="form-control" placeholder="Harga . . ." name="harga_beli" required>
-                    </div>
+                    <label>Nomor Telepon</label>
+                    <input type="text" name="nomor_telp" class="form-control" required autocomplete="off" placeholder="Masukan Nomor Telepon. . . ">
                 </div>
                 <div class="form-group">
-                    <label>Harga Jual</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Rp. </span>
-                        </div>
-                        <input type="number" class="form-control" placeholder="Harga . . ." name="harga_jual" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Stok</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="Stok . . ." name="stok" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">Unit</span>
-                        </div>
-                    </div>
+                    <label>Email</label>
+                    <input type="text" name="email" class="form-control" required autocomplete="off" placeholder="Masukan Alamat Email. . . ">
                 </div>
 
             </div>
@@ -142,7 +116,7 @@
     </div>
 </div>
 
-@foreach ($barang as $d)
+{{-- @foreach ($barang as $d)
 <div class="modal fade" id="editBarang{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -164,30 +138,12 @@
                     <input type="text" name="nama_barang" value="{{ $d->nama_barang }}" class="form-control" required autocomplete="off" placeholder="Masukan Nama Barang. . . ">
                 </div>
                 <div class="form-group">
-                    <label>Kategori</label>
-                    <select name="id_kategori" class="form-control form-control-lg">
-                        <option value="{{ $d->id_kategori }}">{{ $d->nama_kategori }}</option>
-                        @foreach ($kategori as $k)
-                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Harga Beli</label>
+                    <label>Harga</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Rp. </span>
                         </div>
-                        <input type="number" value="{{ $d->harga }}" class="form-control" placeholder="Harga . . ." name="harga_beli" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Harga Jual</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Rp. </span>
-                        </div>
-                        <input type="number" value="{{ $d->harga }}" class="form-control" placeholder="Harga . . ." name="harga_jual" required>
+                        <input type="number" value="{{ $d->harga }}" class="form-control" placeholder="Harga . . ." name="harga" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -210,9 +166,9 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 
-@foreach ($barang as $h)
+{{-- @foreach ($barang as $h)
 <div class="modal fade" id="hapusBarang{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -228,7 +184,7 @@
 
             <div class="modal-body">
 
-                <input type="hidden" name="id" value="{{ $h->id }}" required>
+                <input type="hidden" name="id" value="{{ $d->id }}" required>
                 <div class="form-group">
                     <h4>Apakah Anda Akan Yakin Akan Menghapus?</h4>
                 </div>
@@ -243,6 +199,6 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 
 @endsection

@@ -35,7 +35,7 @@
 
                     <hr class="line-title">
                     <p align="center">
-                        LAPORAN DATA USER
+                       <b>LAPORAN DATA BARANG</b>
                     </p>
 
                     <hr>
@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->nama_barang }}</td>
-                                <td>{{ $row->nama_kategori }}</td>
+                                <td>{{ $row->category->nama_kategori }}</td>
                                 <td>Rp. {{ number_format($row->harga) }}</td>
                                 <td>{{ $row->stok }} Unit</td>
                             </tr>

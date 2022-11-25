@@ -41,20 +41,20 @@ class LaporanController extends Controller
 
     public function laporan_barang()
     {
-        $barang     = Barang::join('kategori', 'kategori.id', '=', 'barang.id_kategori')
-                    -> select('barang.*', 'kategori.nama_kategori')
-                    ->get();
+        $barang     = Barang::all();
 
-        return view('admin.laporan.barang.laporan_barang', compact('barang'));
+        $kategori   = Category::all();
+
+        return view('admin.laporan.barang.laporan_barang', compact('barang','kategori'));
     }
 
     public function print_barang()
     {
-        $barang     = Barang::join('kategori', 'kategori.id', '=', 'barang.id_kategori')
-                    -> select('barang.*', 'kategori.nama_kategori')
-                    ->get();
+        $barang     = Barang::all();
 
-        return view('admin.laporan.barang.print_barang', compact('barang'));
+        $kategori   = Category::all();
+
+        return view('admin.laporan.barang.print_barang', compact('barang', 'kategori'));
     }
 
     public function laporan_masuk()

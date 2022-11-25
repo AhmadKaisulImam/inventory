@@ -36,7 +36,6 @@
                                             <th>No</th>
                                             <th>No Barang Keluar</th>
                                             <th>Name Barang</th>
-                                            <th>Kategori</th>
                                             <th>Tanggal Keluar</th>
                                             <th>Harga</th>
                                             <th>Jumlah</th>
@@ -48,10 +47,9 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $b->no_barang_keluar }}</td>
-                                            <td>{{ $b->nama_barang }}</td>
-                                            <td>{{ $b->nama_kategori }}</td>
+                                            <td>{{ $b->barang->nama_barang }}</td>
                                             <td>{{ date('d F Y', strtotime($b->tgl_barang_keluar)) }}</td>
-                                            <td>Rp. {{ number_format($b->harga) }}</td>
+                                            <td>Rp. {{ number_format($b->barang->harga_jual) }}</td>
                                             <td>{{ $b->jml_barang_keluar }} Unit</td>
                                             <td>Rp. {{ number_format($b->total) }}</td>
                                         </tr>

@@ -15,12 +15,8 @@ class BarangkeluarController extends Controller
 {
     public function index()
     {
-        $barang_keluar   =   Barangkeluar::join('barang', 'barang.id', '=', 'brg_keluar.id_barang')
-                        ->  join('kategori', 'kategori.id', '=', 'barang.id_kategori')
-                        ->  select('brg_keluar.*', 'kategori.nama_kategori', 'barang.harga', 'barang.nama_barang')
-                        ->  get();
-
-        // $barang         = Barang::all();
+        $barang_keluar  = Barangkeluar::all();
+        $barang         = Barang::all();
 
         return view('gudang.transaksi.brg_keluar.brg_keluar', compact('barang_keluar'));
         
@@ -30,7 +26,7 @@ class BarangkeluarController extends Controller
     {
         $barang     = Barang::all();
 
-        $q     = DB::table('brg_keluar')->select(DB::raw('MAX(RIGHT(no_barang_keluar,4)) as kode'));
+        $q     = DB::table('barang_keluar')->select(DB::raw('MAX(RIGHT(no_barang_keluar,4)) as kode'));
         $kd       = "";
         if($q->count()>0)
         {
@@ -50,7 +46,7 @@ class BarangkeluarController extends Controller
 
     public function ajax(Request $request)
     {
-        $id_barang['id_barang'] = $request->id_barang;
+        $id_barang['barang_id'] = $request->id_barang;
         $ajax_barang            = Barang::where('id', $id_barang)->get();
 
         return view('gudang.transaksi.brg_keluar.ajax', compact('ajax_barang'));
@@ -70,8 +66,7 @@ class BarangkeluarController extends Controller
         {
             Barangkeluar::create([
                 'no_barang_keluar'   => $request->no_barang_keluar,
-                'id_barang'          => $request->id_barang,
-                'id_user'            => $request->id_user,
+                'barang_id'          => $request->id_barang,
                 'tgl_barang_keluar'  => $request->tgl_barang_keluar,
                 'jml_barang_keluar'  => $request->jml_barang_keluar,
                 'total'              => $request->total,

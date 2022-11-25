@@ -15,11 +15,19 @@
                     </a>
                 </div>
             </div>
-            @if (auth()->user()->type == 'admin')
-            @include('layouts.sideadmin')
-            @else
-            @include('layouts.sidegudang')
-            @endif
+            <ul class="nav">
+                <li class="nav-item {{ Request::is('home','gudang') ? 'active' : '' }}">
+                    <a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                @if (auth()->user()->type == 'admin')
+                @include('layouts.sideadmin')
+                @else
+                @include('layouts.sidegudang')
+                @endif
+            </ul>
         </div>
     </div>
 </div>

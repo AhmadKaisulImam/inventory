@@ -9,6 +9,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangmasukController;
 use App\Http\Controllers\BarangkeluarController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/barang/{id}/update', [BarangController::class, 'update']);
     Route::get('/barang/{id}/destroy', [BarangController::class, 'destroy']);
 
+    // Master Data Supplier
+    Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    Route::post('/supplier/store', [SupplierController::class, 'store']);
+    Route::post('/supplier/{id}/update', [SupplierController::class, 'update']);
+    Route::get('/supplier/{id}/destroy', [SupplierController::class, 'destroy']);
+
     // Master Data Ketegori
     Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
     Route::post('/kategori/store', [CategoryController::class, 'store']);
@@ -69,24 +76,39 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/laporan_keluar', [LaporanController::class, 'laporan_keluar']);
     Route::get('/laporan_keluar/print_keluar', [LaporanController::class, 'print_keluar']);
     
-});
-  
-// route gudang
-Route::middleware(['auth', 'user-access:gudang'])->group(function () {
-  
-    // Route::get('/super-admin/home', [HomeController::class, 'gudang'])->name('gudang');
-    Route::get('/gudang', [HomeController::class, 'gudang'])->name('gudang');
 
     // Transaki Data Barang Masuk
     Route::get('/barang_masuk', [BarangmasukController::class, 'index']);
     Route::get('/barang_masuk/ajax', [BarangmasukController::class, 'ajax']);
     Route::get('/barang_masuk/create', [BarangmasukController::class, 'create']);
     Route::post('/barang_masuk/store', [BarangmasukController::class, 'store']);
+    Route::get('/barang_masuk/{id}/destroy', [BarangController::class, 'destroy']);
     
     // Transaki Data Barang Keluar
     Route::get('/barang_keluar', [BarangkeluarController::class, 'index']);
     Route::get('/barang_keluar/ajax', [BarangkeluarController::class, 'ajax']);
     Route::get('/barang_keluar/create', [BarangkeluarController::class, 'create']);
     Route::post('/barang_keluar/store', [BarangkeluarController::class, 'store']);
+
 });
+  
+// route gudang
+// Route::middleware(['auth', 'user-access:gudang'])->group(function () {
+  
+//     // Route::get('/super-admin/home', [HomeController::class, 'gudang'])->name('gudang');
+//     Route::get('/gudang', [HomeController::class, 'gudang'])->name('gudang');
+
+//     // Transaki Data Barang Masuk
+//     Route::get('/barang_masuk', [BarangmasukController::class, 'index']);
+//     Route::get('/barang_masuk/ajax', [BarangmasukController::class, 'ajax']);
+//     Route::get('/barang_masuk/create', [BarangmasukController::class, 'create']);
+//     Route::post('/barang_masuk/store', [BarangmasukController::class, 'store']);
+//     Route::get('/barang_masuk/{id}/destroy', [BarangController::class, 'destroy']);
+    
+//     // Transaki Data Barang Keluar
+//     Route::get('/barang_keluar', [BarangkeluarController::class, 'index']);
+//     Route::get('/barang_keluar/ajax', [BarangkeluarController::class, 'ajax']);
+//     Route::get('/barang_keluar/create', [BarangkeluarController::class, 'create']);
+//     Route::post('/barang_keluar/store', [BarangkeluarController::class, 'store']);
+// });
   

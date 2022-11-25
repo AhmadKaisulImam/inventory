@@ -1,10 +1,10 @@
-<ul class="nav">
+{{-- <ul class="nav">
     <li class="nav-item {{ Request::is('gudang') ? 'active' : '' }} ">
-        <a href="/gudang">
+        <a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}">
             <i class="fas fa-home"></i>
             <p>Dashboard</p>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-section">
         <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
@@ -23,4 +23,4 @@
             <p>Barang Keluar</p>
         </a>
     </li>
-</ul>
+{{-- </ul> --}}

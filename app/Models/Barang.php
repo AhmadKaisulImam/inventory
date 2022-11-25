@@ -12,9 +12,10 @@ class Barang extends Model
     protected $table = 'barang';
 
     protected $fillable = [
-        'id_kategori',
         'nama_barang',
-        'harga',
+        'category_id',
+        'harga_beli',
+        'harga_jual',
         'stok',
         'created_at',
         'updated_at',
@@ -22,7 +23,17 @@ class Barang extends Model
 
     public function category()
     {
-        
+        return $this->belongsTo(Category::class);
+    }
+
+    public function Barangmasuk()
+    {
+        return $this->hasMany(Barangmasuk::class);
+    }
+
+    public function Barangkeluar()
+    {
+        return $this->hasMany(Barangkeluar::class);
     }
 
     const CREARED_AT = 'created_at';
