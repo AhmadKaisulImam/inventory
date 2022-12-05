@@ -47,6 +47,30 @@ class BarangmasukController extends Controller
         return view('gudang.transaksi.brg_masuk.add', compact('barang','kd','supplier'));
     }
 
+    public function edit($id)
+    {
+        $barang_masuk = Barangmasuk::findOrFail($id);
+        $barang       = Barang::all();
+        $supplier     = Supplier::all();
+
+        $q        = DB::table('barang_masuk')->select(DB::raw('MAX(RIGHT(no_barang_masuk,4)) as kode'));
+        $kd       = "";
+        if($q->count()>0)
+        {
+            foreach($q->get() as $k)
+            {
+                $tmp  = ((int)$k->kode)+1;
+                $kd   = sprintf("%04s", $tmp);
+            }
+        }
+        else
+        {
+            $kd   = "0001";
+        }
+
+        return view('gudang.transaksi.brg_masuk.edit', \compact('barang_masuk','barang', 'kd', 'supplier'));
+    }
+
     public function ajax(Request $request)
     {
         $id_barang['id_barang'] = $request->id_barang;
@@ -73,18 +97,24 @@ class BarangmasukController extends Controller
         $barang->stok  += $request->jml_barang_masuk;
         $barang->save();
 
-        // toast('Data Berhasil Dimasukan', 'success');
-        alert()->success('Berhasil','Data Telah Ditambahkan');
+        toast()->success('Berhasil','Data Telah Ditambahkan');
         return redirect('/barang_masuk');
     }
 
     public function destroy($id)
     {
         $barang_masuk = Barangmasuk::find($id);
- 
-        $barang_masuk->delete();
+        $barang = Barang::where('id', $barang_masuk->barang_id)
+                ->first();
 
-        alert()->info('Info','Data Telah Dihapus');
+        $barang_masuk->delete();
+        if($barang_masuk)
+        {
+            $barang->stok -= $barang_masuk->jml_barang_masuk;
+            $barang->save();
+        }
+
+        toast()->warning('Berhasil','Data Telah Dihapus');
         return redirect('/barang_masuk');
     }
 }

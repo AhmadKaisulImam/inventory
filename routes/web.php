@@ -44,18 +44,24 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     // Master Data Barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('/barang/create', [BarangController::class, 'create']);
+    Route::get('/barang/{barang}/edit', [BarangController::class, 'edit']);
     Route::post('/barang/store', [BarangController::class, 'store']);
     Route::post('/barang/{id}/update', [BarangController::class, 'update']);
     Route::get('/barang/{id}/destroy', [BarangController::class, 'destroy']);
 
     // Master Data Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    Route::get('/supplier/create', [SupplierController::class, 'create']);
+    Route::get('/supplier/{supplier}/edit', [SupplierController::class, 'edit']);
     Route::post('/supplier/store', [SupplierController::class, 'store']);
     Route::post('/supplier/{id}/update', [SupplierController::class, 'update']);
     Route::get('/supplier/{id}/destroy', [SupplierController::class, 'destroy']);
 
     // Master Data Ketegori
     Route::get('/kategori', [CategoryController::class, 'index'])->name('kategori');
+    Route::get('/kategori/create', [CategoryController::class, 'create']);
+    Route::get('/kategori/{category}/edit', [CategoryController::class, 'edit']);
     Route::post('/kategori/store', [CategoryController::class, 'store']);
     Route::post('/kategori/{id}/update', [CategoryController::class, 'update']);
     Route::get('/kategori/{id}/destroy', [CategoryController::class, 'destroy']);
@@ -82,7 +88,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/barang_masuk/ajax', [BarangmasukController::class, 'ajax']);
     Route::get('/barang_masuk/create', [BarangmasukController::class, 'create']);
     Route::post('/barang_masuk/store', [BarangmasukController::class, 'store']);
-    Route::get('/barang_masuk/{id}/destroy', [BarangController::class, 'destroy']);
+    Route::get('/barang_masuk/{id}/destroy', [BarangmasukController::class, 'destroy']);
     
     // Transaki Data Barang Keluar
     Route::get('/barang_keluar', [BarangkeluarController::class, 'index']);

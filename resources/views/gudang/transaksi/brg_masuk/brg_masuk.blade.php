@@ -24,7 +24,6 @@
                                 <h4 class="card-title">Data Barang Masuk</h4>
                                 <a class="btn btn-primary btn-round ml-auto" href="/barang_masuk/create">
                                     <i class="fa fa-plus"></i>
-                                    Tambah Barang Masuk
                                 </a>
                             </div>
                         </div>
@@ -56,9 +55,8 @@
                                             <td>{{ $b->jml_barang_masuk }} Unit</td>
                                             <td>Rp. {{ number_format($b->total) }}</td>
                                             <td>
-                                                <a href="#hapusBarangmasuk{{ $b->id }}" data-toggle="modal" class="btn btn-danger btn-xs">
+                                                <a href="#hapusBarangmasuk{{ $b->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
                                                     <i class="fa fa-trash"></i>
-                                                    Hapus
                                                 </a>
                                             </td>
                                         </tr>
@@ -77,7 +75,7 @@
 {{-- modal --}}
 @foreach ($barang_masuk as $h)
 <div class="modal fade" id="hapusBarangmasuk{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Hapus Barang Masuk</h5>
@@ -108,4 +106,122 @@
 </div>
 @endforeach
 
+{{-- @foreach ($barang_masuk as $bm)
+<div class="modal fade" id="editBarangmasuk{{ $bm->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ubah Barang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" action="/barang_masuk/store">
+                @csrf
+                <div class="card-body">
+                    <input type="hidden" name="id" value="{{ $bm->id }}" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>No Barang Masuk</label>
+                            <input type="text" class="form-control" name="no_barang_masuk" value="{{ $bm->no_barang_masuk }}" readonly required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tgl">Tanggal Masuk</label>
+                            <input type="date" id="tgl" class="form-control" name="tgl_barang_masuk" value="{{ date('Y-m-d',strtotime($bm->tgl_barang_masuk)) }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Barang</label>
+                        <select class="form-control form-control-lg" name="barang_id" id="id_barang">
+                            <option value="{{ $bm->barang->id }}">{{ $bm->barang->nama_barang }}</option>
+                            @foreach ($barang as $a)
+                            <option value="{{ $a->id }}">{{ $a->nama_barang }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Supplier</label>
+                        <select class="form-control form-control-lg" name="supplier_id" id="id_supplier">
+                            <option value="{{ $bm->supplier->id }}">{{ $bm->supplier->nama_supplier }}</option>
+                            @foreach ($supplier as $s)
+                            <option value="{{ $s->id }}">{{ $s->nama_supplier }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Rp</span>
+                            </div>
+                            <input type="text" class="form-control" id="harga" value="{{ $bm->barang->harga_beli }}" required readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Jumlah Barang Masuk</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" value="{{ $bm->jml_barang_masuk }}" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">Unit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Total</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Rp. </span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Total . . ." id="total" name="total" value="{{ $bm->total }}" readonly required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+                        <a href="/barang_masuk" class="btn btn-danger"><i class="fa fa-undo"></i> Kembali</a>
+                    </div>
+                </div>
+                </form>
+        </div>
+    </div>
+</div>
+@endforeach
+
+<script src="/assets/js/core/jquery.3.2.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#jml_barang_masuk").keyup(function() {
+            var jml_barang_masuk   = $("#jml_barang_masuk").val();
+            var harga              = $("#harga").val();
+            var total              = parseInt(harga) * parseInt(jml_barang_masuk);
+            $("#total").val(total);
+        })
+    })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        header: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script> --}}
+
+{{-- <script type="text/javascript">
+    $("#id_barang").change(function(){
+        var id_barang = $("#id_barang").val();
+        $.ajax({
+            type    : "GET",
+            url     : "/barang_masuk/ajax",
+            data    : "id_barang="+id_barang,
+            cache   : false,
+            success : function(data){
+                $('#detail_barang').html(data);
+            }
+        });
+    });
+</script> --}}
 @endsection

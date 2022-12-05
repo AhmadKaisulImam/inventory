@@ -19,46 +19,52 @@ class CategoryController extends Controller
     {
         $kategori = Category::all();
 
-        return view('admin.master.kategori', compact('kategori'));
+        return view('admin.master.kategori.kategori', compact('kategori'));
+    }
+
+    public function create()
+    {
+        $kategori = Category::all();
+
+        return view('admin.master.kategori.addkategori', compact('kategori'));
     }
 
     public function store(Request $request)
     {
-        $isi = [
-            'nama_kategori' => 'required|unique:kategori',
-        ];
 
-        $message =[
-            'nama_kategori' => 'Nama Kategori Masih Kosong',
-        ];
-
-        $validator = Validator::make($request->all(), $isi, $message);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput($request->all());
-        }
-
-        Category::create([
-            'nama_kategori'    => $request->nama_kategori,
-            'created_at'       => date('Y-m-d H:i:s'),
-            'updated_at'       => date('Y-m-d H:i:s'),
+        $validasi =  $request->validate([
+            'nama_kategori' => 'required|unique:kategori|min:4'
         ]);
 
-        alert()->success('Berhasil','Data Berhasil Ditambahkan');
+        Category::create($validasi);
+
+        toast()->success('Berhasil','Data Telah Ditambahkan');
         return redirect('/kategori');
 
     }
 
+    public function edit(Category $category)
+    {
+        return \view('admin.master.kategori.editkategori', [
+            'category' => $category
+        ]);
+    }
+
     public function update(Request $request, $id)
     {
+
         $kategori = Category::find($id);
  
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->updated_at    = date('Y-m-d H:i:s');
-         
-        $kategori->save();
+        $kategori = [
+            'nama_kategori' => 'required|unique:kategori|min:4'
+        ];
 
-        alert()->success('Berhasil','Data Berhasil Diubah');
+        $validasi = $request->validate($kategori);
+
+        Category::where('id', $id)
+                ->update($validasi);
+                
+        \toast()->success('Berhasil','Data Berhasil Diubah');
         return redirect('/kategori');
     }
 
@@ -68,7 +74,7 @@ class CategoryController extends Controller
  
         $kategori->delete();
 
-        alert()->info('Info','Data Telah Dihapus');
+        \toast()->info('Info','Data Telah Dihapus');
         return redirect('/kategori');
     }
 }

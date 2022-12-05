@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Barangmasuk;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,40 +23,60 @@ class BarangController extends Controller
 
         $kategori   = Category::all();
 
-        return view('admin.master.barang', compact('barang', 'kategori'));
+        return view('admin.master.barang.barang', compact('barang', 'kategori'));
+    }
+
+    public function create()
+    {
+        $barang     = Barang::all();
+
+        $kategori   = Category::all();
+
+        return \view('admin.master.barang.addbarang', \compact('barang', 'kategori'));
     }
 
     public function store(Request $request)
     {
-        Barang::create([
-            'category_id'  => $request->kategori,
-            'nama_barang'  => $request->nama_barang,
-            'harga_beli'   => $request->harga_beli,
-            'harga_jual'   => $request->harga_jual,
-            'stok'         => $request->stok,
-            'created_at'   => date('Y-m-d H:i:s'),
-            'updated_at'   => date('Y-m-d H:i:s'),
+        $validasi = $request->validate([
+            'category_id'  => 'required',
+            'nama_barang'  => 'required|unique:barang|min:4|max:256',
+            'harga_beli'   => 'required',
+            'harga_jual'   => 'required',
+            'stok'         => 'required',
         ]);
 
-        alert()->success('Berhasil','Data Berhasil Ditambahkan');
-        // toast('Data Berhasil Dimasukan', 'success');
+        Barang::create($validasi);
+
+        \toast()->success('Berhasil','Data Berhasil Ditambahkan');
         return redirect('/barang');
+    }
+
+    public function edit(Barang $barang)
+    {
+        return \view('admin.master.barang.editbarang', [
+            'barang' => $barang,
+            'kategori' => Category::all()
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         $barang = Barang::find($id);
 
-        $barang->kategori_id    = $request->id_kategori;
-        $barang->nama_barang    = $request->nama_barang;
-        $barang->harga_beli     = $request->harga_beli;
-        $barang->harga_jual     = $request->harga_jual;
-        $barang->stok           = $request->stok;
-        $barang->updated_at     = date('Y-m-d H:i:s');
+        $barang = [
+            'category_id'  => 'required',
+            'nama_barang'  => 'required|min:4|max:256',
+            'harga_beli'   => 'required',
+            'harga_jual'   => 'required',
+            'stok'         => 'required',
+        ];
 
-        $barang->save();
+        $validasi = $request->validate($barang);
 
-        alert()->success('Berhasil','Data Berhasil Diubah');
+        Barang::where('id', $id)
+              ->update($validasi);
+
+        \toast()->success('Berhasil','Data Berhasil Diubah');
         return redirect('/barang');
     }
 
@@ -71,7 +92,7 @@ class BarangController extends Controller
  
         $barang->delete();
 
-        alert()->info('Info','Data Telah Dihapus');
+        \toast()->info('Info','Data Telah Dihapus');
         return redirect('/barang');
     }
 }

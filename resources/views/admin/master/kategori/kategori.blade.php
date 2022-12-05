@@ -20,12 +20,20 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center justify-content-between">
                                 <h4 class="card-title">Data Kategori</h4>
-                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addKategori">
-                                    <i class="fa fa-plus"></i>
-                                    Tambah Kategori
-                                </button>
+                                <div class="navi">
+                                    <a href="#" class="btn btn-secondary btn-round ">
+                                        <i class="fas fa-file-pdf"></i>
+                                        PDF
+                                    </a>
+                                    <a class="btn btn-success" href="/kategori/create">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <a class="btn btn-secondary" href="#">
+                                        Sampah
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body"
@@ -44,13 +52,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $u->nama_kategori }}</td>
                                             <td>
-                                                <a href="#editKategori{{ $u->id }}" data-toggle="modal" class="btn btn-primary btn-xs">
+                                                <a href="/kategori/{{ $u->id }}/edit" class="btn btn-warning btn-xs" title="Edit">
                                                     <i class="fa fa-edit"></i>
-                                                    Edit
                                                 </a>
-                                                <a href="#hapusKategori{{ $u->id }}" data-toggle="modal" class="btn btn-danger btn-xs">
+                                                <a href="#hapusKategori{{ $u->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
                                                     <i class="fa fa-trash"></i>
-                                                    Hapus
                                                 </a>
                                             </td>
                                         </tr>
@@ -67,74 +73,6 @@
 </div>
 
 {{-- Modal --}}
-<div class="modal fade" id="addKategori" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form method="POST" enctype="multipart/form-data" action="/kategori/store">
-            @csrf
-
-            <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Nama Kategori</label>
-                    <input type="text" name="nama_kategori" class="form-control" required autofocus autocomplete="off" placeholder="Masukan Nama . . . ">
-                    @error('nama_kategori')
-                        <div class="text-danger">* {{ $message }}</div>
-                    @enderror
-                </div>
-
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-@foreach ($kategori as $d)
-<div class="modal fade" id="editKategori{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Ubah Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form method="POST" enctype="multipart/form-data" action="/kategori/{{ $d->id }}/update">
-            @csrf
-
-            <div class="modal-body">
-
-                <input type="hidden" name="id" value="{{ $d->id }}" required>
-                <div class="form-group">
-                    <label>Nama Kategori</label>
-                    <input type="text" name="nama_kategori" value="{{ $d->nama_kategori }}" class="form-control" required autocomplete="off" placeholder="Masukan Nama Kategori">
-                </div>
-
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
-
 @foreach ($kategori as $h)
 <div class="modal fade" id="hapusKategori{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -151,7 +89,7 @@
 
             <div class="modal-body">
 
-                <input type="hidden" name="id" value="{{ $d->id }}" required>
+                <input type="hidden" name="id" value="{{ $h->id }}" required>
                 <div class="form-group">
                     <h4>Apakah Anda Akan Yakin Akan Menghapus?</h4>
                 </div>

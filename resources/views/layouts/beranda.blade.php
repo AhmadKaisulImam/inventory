@@ -5,7 +5,8 @@
 	<title>Inventory</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/>
+	{{-- <link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/> --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
 
 	<!-- Fonts and icons -->
 	<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -34,9 +35,9 @@
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
-				<a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
+				{{-- <a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
                     <img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
-                </a>
+                </a> --}}
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
 						<i class="fa fa-bars"></i>

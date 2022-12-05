@@ -14,16 +14,16 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <i class="fas fa-users"></i>
+                                        <a href="/supplier">
+                                            <i class="fas fa-truck"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col col-stats ml-3 ml-sm-0">
-                                    <a href="/user">
-                                        <div class="numbers">
-                                            <p class="card-category">Data Supplier</p>
-                                            <h4 class="card-title">{{ $supplier }}</h4>
-                                        </div>
-                                    </a>
+                                    <div class="numbers">
+                                        <p class="card-category">Data Supplier</p>
+                                        <h4 class="card-title">{{ $supplier }}</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
-                                <div class="card-title">User Statistics</div>
+                                <div class="card-title">Statistik Bulanan</div>
                             </div>
                         </div>
                         <div class="card-body">

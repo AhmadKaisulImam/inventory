@@ -2,9 +2,27 @@
         <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
         </span>
-        <h4 class="text-section">Menu</h4>
+        <h4 class="text-section">Data Master</h4>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }}">
+        <a href="/kategori">
+            <i class="fas fa-file"></i>
+            <p>Data Kategori</p>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('supplier') ? 'active' : '' }}">
+        <a href="/supplier">
+            <i class="fas fa-file"></i>
+            <p>Data Supplier</p>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('barang') ? 'active' : '' }}">
+        <a href="/barang">
+            <i class="fas fa-file"></i>
+            <p>Data Barang</p>
+        </a>
+    </li>
+    {{-- <li class="nav-item {{ Request::is('kategori' , 'barang' , 'supplier') ? 'active' : '' }}">
         <a data-toggle="collapse" href="#base">
             <i class="fas fa-layer-group"></i>
             <p>Data Master</p>
@@ -12,7 +30,7 @@
         </a>
         <div class="collapse" id="base">
             <ul class="nav nav-collapse">
-                {{-- <li class="{{ Request::is('user') ? 'active' : '' }}">
+                <li class="{{ Request::is('user') ? 'active' : '' }}">
                     <a href="/user">
                         <span class="sub-item">Data User</span>
                     </a>
@@ -22,19 +40,19 @@
                         <span class="sub-item">Data Kategori</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('supplier') ? 'active' : '' }}">
+                    <a href="/supplier">
+                        <span class="sub-item">Data Supplier</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('barang') ? 'active' : '' }}">
                     <a href="/barang">
                         <span class="sub-item">Data Barang</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('supplier') ? 'active' : '' }}">
-                    <a href="/supplier">
-                        <span class="sub-item">Data Supplier</span>
-                    </a>
-                </li> --}}
             </ul>
         </div>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a data-toggle="collapse" href="#laporan">
             <i class="fas fa-file"></i>
@@ -71,7 +89,7 @@
             </ul>
         </div>
     </li>
-    <li class="nav-item {{ Request::is('user') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('user') ? 'active' : '' }}">
         <a href="/user">
             <i class="fa fa-user"></i>
             <p>Data User</p>
@@ -94,6 +112,12 @@
             <i class=" fa fa-file"></i>
             <p>Data Supplier</p>
         </a>
+    </li> --}}
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Transaksi</h4>
     </li>
     <li class="nav-item {{ Request::is('barang_masuk') ? 'active' : '' }} {{ Request::is('barang_masuk/create') ? 'active' : '' }}">
         <a href="/barang_masuk">
