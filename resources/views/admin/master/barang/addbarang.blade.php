@@ -43,7 +43,6 @@
                                 <select name="category_id" class="form-control form-control-lg @error('category_id') is-invalid @enderror">
                                     <option value="" hidden>-- Pilih Kategori --</option>
                                     @foreach ($kategori as $k)
-                                        {{-- <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option> --}}
                                         <option {{ old('category_id') == $k->id ? "selected" : "" }} value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
                                     @endforeach
                                 </select>
@@ -84,7 +83,7 @@
                             <div class="form-group">
                                 <label>Stok</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" value="{{ old('stok') }}" class="form-control @error('stok') is-invalid @enderror" placeholder="Stok . . ." name="stok" required>
+                                    <input type="number" value="0" class="form-control @error('stok') is-invalid @enderror" placeholder="Stok . . ." name="stok" readonly>
                                     @error('stok')
                                     <div class="invalid-feedback">
                                         {{ $message }}

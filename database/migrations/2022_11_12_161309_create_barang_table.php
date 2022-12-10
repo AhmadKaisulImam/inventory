@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->onDelete('cascade');
             $table->string('nama_barang');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('stok');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+        // Schema::dropIfExists('barang');
+        Schema::table('barang', function (Blueprint $table) {
+            $table->dropSoftDeletes(); 
+        });
     }
 };

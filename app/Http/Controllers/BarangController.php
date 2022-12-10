@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Barangmasuk;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class BarangController extends Controller
     {
         $barang     = Barang::all();
 
-        $kategori   = Category::all();
+        $kategori   = Category::withTrashed()->get();
 
         return view('admin.master.barang.barang', compact('barang', 'kategori'));
     }

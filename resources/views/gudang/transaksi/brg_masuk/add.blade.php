@@ -40,10 +40,15 @@
                                 <div class="col-md-6">
                                     <label>No Barang Masuk</label>
                                     <input type="text" class="form-control" name="no_barang_masuk" value="{{ 'NBM-'.$kd }}" readonly required>
+                                    @error('no_barang_masuk')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tgl">Tanggal Masuk</label>
-                                    <input type="date" id="tgl" class="form-control" name="tgl_barang_masuk" placeholder="Tanggal Barang Masuk . . ." required>
+                                    <input type="date" id="tgl" class="form-control" name="tgl_barang_masuk" value="{{ old('tgl_barang_masuk') }}" placeholder="Tanggal Barang Masuk . . ." required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -51,29 +56,46 @@
                                 <select class="form-control form-control-lg" name="barang_id" id="id_barang">
                                     <option value="" hidden="">-- Pilih Barang --</option>
                                     @foreach ($barang as $a)
-                                    <option value="{{ $a->id }}">{{ $a->nama_barang }}</option>
+                                    <option {{ old('barang_id') == $a->id ? "selected" : "" }} value="{{ $a->id }}">{{ $a->nama_barang }}</option>
+                                    {{-- <option value="{{ $a->id }}">{{ $a->nama_barang }}</option> --}}
                                     @endforeach
                                 </select>
+                                @error('barang_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Nama Supplier</label>
                                 <select class="form-control form-control-lg" name="supplier_id" id="id_supplier">
                                     <option value="" hidden="">-- Pilih Supplier --</option>
                                     @foreach ($supplier as $s)
-                                    <option value="{{ $s->id }}">{{ $s->nama_supplier }}</option>
+                                    <option {{ old('supplier_id') == $s->id ? "selected" : "" }} value="{{ $s->id }}">{{ $s->nama_supplier }}</option>
+                                    {{-- <option value="{{ $s->id }}">{{ $s->nama_supplier }}</option> --}}
                                     @endforeach
                                 </select>
+                                @error('supplier_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div id="detail_barang"></div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Jumlah Barang Masuk</label>
                                     <div class="input-group mb-3">
-                                        <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" required>
+                                        <input type="number" class="form-control" placeholder="Jumlah . . ." id="jml_barang_masuk" name="jml_barang_masuk" value="{{ old('jml_barang_masuk') }}" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">Unit</span>
                                         </div>
                                     </div>
+                                    @error('jml_barang_masuk')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label>Total</label>

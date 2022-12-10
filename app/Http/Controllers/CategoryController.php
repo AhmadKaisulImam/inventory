@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $kategori = Category::all();
+        $kategori = Category::get();
 
         return view('admin.master.kategori.kategori', compact('kategori'));
     }
@@ -72,6 +72,7 @@ class CategoryController extends Controller
     {
         $kategori = Category::find($id);
  
+        // $kategori->barang()->delete();
         $kategori->delete();
 
         \toast()->info('Info','Data Telah Dihapus');

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('jml_barang_masuk');
             $table->bigInteger('total');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_masuk');
+        Schema::table('barang_masuk', function (Blueprint $table) {
+            $table->dropSoftDeletes(); 
+        });
     }
 };

@@ -6,13 +6,13 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Transaksi</h4>
+                <h4 class="page-title">Sampah</h4>
                 <ul class="breadcrumbs">
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Barang Masuk</a>
+                        <a href="#">Data Terhapus</a>
                     </li>
                 </ul>
             </div>
@@ -20,11 +20,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Barang Masuk</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="/barang_masuk/create">
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4 class="card-title">Data Barang Terhapus</h4>
+                                <div class="dropdown">
+                                    <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    Data Sampah Lainya
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/sampah">Kategori</a>
+                                        <a class="dropdown-item" href="/sampah_supplier">Supllier</a>
+                                        <a class="dropdown-item" href="/sampah_brg">Barang</a>
+                                        <a class="dropdown-item" href="/sampah_brgkeluar">Barang Keluar</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body"
@@ -54,23 +62,14 @@
                                             @else
                                             <td>{{ $b->supplier->nama_supplier }}</td>
                                             @endif
-                                            @if (empty($b->barang->nama_barang))
-                                            <td>Data Terhapus</td>
-                                            @else
                                             <td>{{ $b->barang->nama_barang }}</td>
-                                            @endif
-                                            {{-- <td>{{ $b->barang->nama_barang }}</td> --}}
                                             <td>{{ date('d F Y', strtotime($b->tgl_barang_masuk)) }}</td>
-                                            @if (empty($b->barang->harga_beli))
-                                            <td>-</td>
-                                            @else
                                             <td>Rp. {{ number_format($b->barang->harga_beli) }}</td>
-                                            @endif
                                             <td>{{ $b->jml_barang_masuk }} Unit</td>
                                             <td>Rp. {{ number_format($b->total) }}</td>
                                             <td>
-                                                <a href="#hapusBarangmasuk{{ $b->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
-                                                    <i class="fa fa-trash"></i>
+                                                <a href="/sampahbrgmasuk/{{ $b->id }}/restorebrgmasuk" class="btn btn-warning btn-xs" title="Restore">
+                                                    Restore
                                                 </a>
                                             </td>
                                         </tr>
@@ -85,39 +84,5 @@
         </div>
     </div>
 </div>
-
-{{-- modal --}}
-@foreach ($barang_masuk as $h)
-<div class="modal fade" id="hapusBarangmasuk{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Hapus Barang Masuk</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form method="GET" enctype="multipart/form-data" action="/barang_masuk/{{ $h->id }}/destroy">
-            @csrf
-
-            <div class="modal-body">
-
-                <input type="hidden" name="id" value="{{ $h->id }}" required>
-                <div class="form-group">
-                    <h4>Apakah Anda Akan Yakin Akan Menghapus?</h4>
-                </div>
-
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
-                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
 
 @endsection

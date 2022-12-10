@@ -80,4 +80,21 @@ class BarangkeluarController extends Controller
             return redirect('/barang_keluar');
         }
     }
+
+    public function destroy($id)
+    {
+        $barang_keluar = Barangkeluar::find($id);
+        $barang = Barang::where('id', $barang_keluar->barang_id)
+                ->first();
+
+        $barang_keluar->delete();
+        if($barang_keluar)
+        {
+            $barang->stok += $barang_keluar->jml_barang_keluar;
+            $barang->save();
+        }
+
+        toast()->warning('Berhasil','Data Telah Dihapus');
+        return redirect('/barang_keluar');
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BarangmasukController;
 use App\Http\Controllers\BarangkeluarController;
+use App\Http\Controllers\SampahController;
 use App\Http\Controllers\SupplierController;
 
 /*
@@ -95,6 +96,27 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/barang_keluar/ajax', [BarangkeluarController::class, 'ajax']);
     Route::get('/barang_keluar/create', [BarangkeluarController::class, 'create']);
     Route::post('/barang_keluar/store', [BarangkeluarController::class, 'store']);
+    Route::get('/barang_keluar/{id}/destroy', [BarangkeluarController::class, 'destroy']);
+
+    // Sampah kategori
+    Route::get('/sampah', [SampahController::class, 'trash_kategori']);
+    Route::get('/sampah/{id}/restore', [SampahController::class, 'restore']);
+
+    // Sampah supplier
+    Route::get('/sampah_supplier', [SampahController::class, 'trash_supplier']);
+    Route::get('/sampahsupplier/{id}/restoresupplier', [SampahController::class, 'restoresupplier']);
+    
+    // Sampah barang
+    Route::get('/sampah_brg', [SampahController::class, 'trash_brg']);
+    Route::get('/sampahbarang/{id}/restorebarang', [SampahController::class, 'restorebarang']);
+    
+    // Sampah barang masuk
+    Route::get('/sampah_brgmasuk', [SampahController::class, 'trash_brgmasuk']);
+    Route::get('/sampahbrgmasuk/{id}/restorebrgmasuk', [SampahController::class, 'restorebrgmasuk']);
+    
+    // Sampah barang keluar
+    Route::get('/sampah_brgkeluar', [SampahController::class, 'trash_brgkeluar']);
+    Route::get('/sampahbrgkeluar/{id}/restorebrgkeluar', [SampahController::class, 'restorebrgkeluar']);
 
 });
   

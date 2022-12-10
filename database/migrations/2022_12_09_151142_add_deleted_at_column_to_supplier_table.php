@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('supplier', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_supplier');
-            $table->string('alamat');
-            $table->string('nomor_telp');
-            $table->string('email');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('supplier', function (Blueprint $table) {
+            //
         });
     }
 
@@ -32,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('supplier', function (Blueprint $table) {
-            $table->dropSoftDeletes(); 
+            //
         });
     }
 };

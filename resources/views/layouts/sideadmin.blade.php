@@ -2,23 +2,23 @@
         <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
         </span>
-        <h4 class="text-section">Data Master</h4>
+        <h4 class="text-section">Master Data</h4>
     </li>
     <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }}">
         <a href="/kategori">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-list-alt"></i>
             <p>Data Kategori</p>
         </a>
     </li>
     <li class="nav-item {{ Request::is('supplier') ? 'active' : '' }}">
         <a href="/supplier">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-shipping-fast"></i>
             <p>Data Supplier</p>
         </a>
     </li>
     <li class="nav-item {{ Request::is('barang') ? 'active' : '' }}">
         <a href="/barang">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-box-open"></i>
             <p>Data Barang</p>
         </a>
     </li>
@@ -55,7 +55,7 @@
     </li> --}}
     <li class="nav-item">
         <a data-toggle="collapse" href="#laporan">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-file-alt"></i>
             <p>Data Laporan</p>
             <span class="caret"></span>
         </a>
@@ -121,14 +121,20 @@
     </li>
     <li class="nav-item {{ Request::is('barang_masuk') ? 'active' : '' }} {{ Request::is('barang_masuk/create') ? 'active' : '' }}">
         <a href="/barang_masuk">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-share"></i>
             <p>Barang Masuk</p>
         </a>
     </li>
     <li class="nav-item {{ Request::is('barang_keluar') ? 'active' : '' }} {{ Request::is('barang_keluar') ? 'active' : '' }}">
         <a href="/barang_keluar">
-            <i class="fas fa-file"></i>
+            <i class="fas fa-reply"></i>
             <p>Barang Keluar</p>
+        </a>
+    </li>
+    <li class="nav-item {{ Request::is('sampah') ? 'active' : '' }} {{ Request::is('sampah') ? 'active' : '' }}">
+        <a href="/sampah">
+            <i class="fas fa-trash-alt"></i>
+            <p>Sampah</p>
         </a>
     </li>
 {{-- </ul> --}}

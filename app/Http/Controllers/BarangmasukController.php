@@ -81,16 +81,25 @@ class BarangmasukController extends Controller
 
     public function store(Request $request)
     {
-        Barangmasuk::create([
-            'no_barang_masuk'   => $request->no_barang_masuk,
-            'supplier_id'       => $request->supplier_id,
-            'barang_id'         => $request->barang_id,
-            'tgl_barang_masuk'  => $request->tgl_barang_masuk,
-            'jml_barang_masuk'  => $request->jml_barang_masuk,
-            'total'             => $request->total,
-            'created_at'        => date('Y-m-d H:i:s'),
-            'updated_at'        => date('Y-m-d H:i:s'),
+        // Barangmasuk::create([
+        //     'no_barang_masuk'   => $request->no_barang_masuk,
+        //     'supplier_id'       => $request->supplier_id,
+        //     'barang_id'         => $request->barang_id,
+        //     'tgl_barang_masuk'  => $request->tgl_barang_masuk,
+        //     'jml_barang_masuk'  => $request->jml_barang_masuk,
+        //     'total'             => $request->total,
+        // ]);
+
+        $validasi = $request->validate([
+            'no_barang_masuk'   => 'required',
+            'supplier_id'       => 'required',
+            'barang_id'         => 'required',
+            'tgl_barang_masuk'  => 'required',
+            'jml_barang_masuk'  => 'required|min:1',
+            'total'             => 'required',
         ]);
+
+        Barangmasuk::create($validasi);
 
         $barang = Barang::find($request->barang_id);
 

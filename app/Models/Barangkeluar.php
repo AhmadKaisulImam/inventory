@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Barangkeluar extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'barang_keluar';
 
@@ -17,8 +18,6 @@ class Barangkeluar extends Model
         'tgl_barang_keluar',
         'jml_barang_keluar',
         'total',
-        'created_at',
-        'updated_at',
     ];
 
     public function barang()

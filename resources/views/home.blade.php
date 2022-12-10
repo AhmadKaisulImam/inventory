@@ -54,7 +54,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="far fa-chart-bar"></i>
+                                        <i class="fas fa-box-open"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ml-3 ml-sm-0">
@@ -85,23 +85,31 @@
                 <div class="col-md-4">
                     <div class="card card-secondary bg-secondary-gradient">
                         <div class="card-header">
-                            <div class="card-title">Barang Masuk</div>
-                            <div class="card-category">{{ date('Y-m-d') }}</div>
+                            <div class="card-title">Barang Masuk Hari Ini</div>
+                            <div class="card-category d-flex justify-content-between">
+                                <h2>{{ date('d F Y') }} :</h2>
+                                <h2>{{ $barang_masuk_today }}</h2>
+                            </div>
                         </div>
                         <div class="card-body pb-0">
-                            <div class="mb-4 mt-2">
-                                <h1 class="text-center">{{ $barang_masuk_today }}</h1>
+                            <div class="mb-4 mt-2 d-flex justify-content-between">
+                                <h2>Pengeluaran : </h2>
+                                <h1 class="text-center">Rp. {{ number_format($total_masuk) }}</h1>
                             </div>
                         </div>
                     </div>
                     <div class="card card-info bg-info-gradient">
                         <div class="card-header">
-                            <div class="card-title">Pemasukan</div>
-                            <div class="card-category">{{ date('Y-m-d') }}</div>
+                            <div class="card-title">Barang Keluar Hari Ini</div>
+                            <div class="card-category d-flex justify-content-between">
+                                <h2>{{ date('d F Y') }}</h2>
+                                <h2>{{ $barang_keluar_today }}</h2>
+                            </div>
                         </div>
                         <div class="card-body pb-0">
-                            <div class="mb-4 mt-2">
-                                <h1 class="text-center">Rp. {{ number_format($total) }}</h1>
+                            <div class="mb-4 mt-2 d-flex justify-content-between">
+                                <h2>Pendapatan : </h2>
+                                <h1 class="text-center">Rp. {{ number_format($total_keluar) }}</h1>
                             </div>
                         </div>
                     </div>
@@ -123,12 +131,16 @@ var myMultipleBarChart = new Chart(multipleBarChart, {
 			label: "Barang Masuk",
 			backgroundColor: '#59d05d',
 			borderColor: '#59d05d',
-			data: [95, 100, 112, 101, 144, 159, 178, 156, 188, 190, 210, 245],
+			data: [ {{ $masuk1 }}, {{ $masuk2 }}, {{ $masuk3 }}, {{ $masuk4 }}, {{ $masuk5 }}, {{ $masuk6 }}, 
+                    {{ $masuk7 }}, {{ $masuk8 }}, {{ $masuk9 }}, {{ $masuk10 }}, {{ $masuk11 }}, {{ $masuk12 }}  
+                ],
 		},{
 			label: "Barang Keluar",
 			backgroundColor: '#fdaf4b',
 			borderColor: '#fdaf4b',
-			data: [145, 256, 244, 233, 210, 279, 287, 253, 287, 299, 312,356],
+			data: [ {{ $keluar1 }}, {{ $keluar2 }}, {{ $keluar3 }}, {{ $keluar4 }}, {{ $keluar5 }}, {{ $keluar6 }}, 
+                    {{ $keluar7 }}, {{ $keluar8 }}, {{ $keluar9 }}, {{ $keluar10 }}, {{ $keluar11 }}, {{ $keluar12 }}  
+                ],
 		}],
 	},
 	options: {

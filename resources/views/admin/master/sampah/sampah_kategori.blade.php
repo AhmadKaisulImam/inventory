@@ -6,13 +6,13 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Master Data</h4>
+                <h4 class="page-title">Sampah</h4>
                 <ul class="breadcrumbs">
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Data Barang</a>
+                        <a href="#">Data Terhapus</a>
                     </li>
                 </ul>
             </div>
@@ -20,11 +20,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <h4 class="card-title">Data Barang</h4>
-                                <a class="btn btn-primary btn-round ml-auto" href="/barang/create">
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4 class="card-title">Data Kategori Terhapus</h4>
+                                <div class="dropdown">
+                                    <a class="btn btn-warning dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    Data Sampah Lainya
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/sampah_brg">Barang</a>
+                                        <a class="dropdown-item" href="/sampah_supplier">Supllier</a>
+                                        <a class="dropdown-item" href="/sampah_brgmasuk">Barang Masuk</a>
+                                        <a class="dropdown-item" href="/sampah_brgkeluar">Barang Keluar</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body"
@@ -33,34 +41,18 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Harga Beli</th>
-                                            <th>Harga Jual</th>
-                                            <th>Stok</th>
+                                            <th>Name kategori</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($barang as $u)
+                                        @foreach ($kategori as $k)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $u->nama_barang }}</td>
-                                            {{-- <td>{{ $u->category->nama_kategori }}</td> --}}
-                                                @if (empty($u->category->nama_kategori))
-                                                    <td>-</td>
-                                                @else
-                                                    <td>{{ $u->category->nama_kategori }}</td>
-                                                @endif
-                                            <td>Rp. {{ number_format($u->harga_beli) }}</td>
-                                            <td>Rp. {{ number_format($u->harga_jual) }}</td>
-                                            <td>{{ $u->stok }} Unit</td>
+                                            <td>{{ $k->nama_kategori }}</td>
                                             <td>
-                                                <a href="/barang/{{ $u->id }}/edit" class="btn btn-warning btn-xs" title="Edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#hapusBarang{{ $u->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
-                                                    <i class="fa fa-trash"></i>
+                                                <a href="/sampah/{{ $k->id }}/restore" class="btn btn-warning btn-xs" title="Restore">
+                                                    Restrore
                                                 </a>
                                             </td>
                                         </tr>
@@ -77,19 +69,18 @@
 </div>
 
 {{-- Modal --}}
-
-@foreach ($barang as $h)
-<div class="modal fade" id="hapusBarang{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+@foreach ($kategori as $h)
+<div class="modal fade" id="hapusKategori{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Hapus Barang</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form method="GET" enctype="multipart/form-data" action="/barang/{{ $h->id }}/destroy">
+            <form method="GET" enctype="multipart/form-data" action="/kategori/{{ $h->id }}/destroy">
             @csrf
 
             <div class="modal-body">

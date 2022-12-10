@@ -12,7 +12,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Data Kategori</a>
+                        <h2><b>Data Kategori</b></h2>
                     </li>
                 </ul>
             </div>
@@ -21,18 +21,19 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h4 class="card-title">Data Kategori</h4>
-                                <div class="navi">
-                                    <a href="#" class="btn btn-secondary btn-round ">
-                                        <i class="fas fa-file-pdf"></i>
-                                        PDF
+                                <a class="btn btn-primary" href="/kategori/create">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <h4 class="card-title"><b>Data Kategori</b></h4>
+                                <div class="dropdown">
+                                    <a class="btn btn-info dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-file-export"></i>
                                     </a>
-                                    <a class="btn btn-success" href="/kategori/create">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                    <a class="btn btn-secondary" href="#">
-                                        Sampah
-                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Excel</a>
+                                        <a class="dropdown-item" href="#">PDF</a>
+                                        <a class="dropdown-item" href="#">CSV</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Name kategori</th>
+                                            <th>Nama kategori</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
