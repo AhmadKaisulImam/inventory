@@ -49,6 +49,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/user/store', [UserController::class, 'store']);
     Route::post('/user/{id}/update', [UserController::class, 'update']);
+    Route::post('/user/{id}/updatepassword', [UserController::class, 'updatePassword']);
     Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
 
     // Master Data Barang

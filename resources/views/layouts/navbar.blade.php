@@ -17,7 +17,11 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                        @if (Auth::user()->foto)
+                        <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="rounded-circle avatar-img">
+                        @else
+                        <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">

@@ -35,7 +35,7 @@
 			<div class="logo-header">
 				
 				<a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
-                    <img src="assets/img/webane.svg" alt="navbar brand" style="width: 90%; height: 90%" class="navbar-brand">
+                    <img src="../assets/img/webane.svg" alt="navbar brand" style="width: 90%; height: 90%" class="navbar-brand">
                 </a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">

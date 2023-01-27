@@ -55,63 +55,32 @@ class UserController extends Controller
         return redirect('/user');
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     request()->validate([
-    //         'name'       => 'required|string|min:2|max:100',
-    //         'email'      => 'required|email|unique:users,email, ' . $id . ',id',
-    //         'old_password' => 'nullable|string',
-    //         'password' => 'nullable|required_with:old_password|string|confirmed|min:6'
-    //     ]);
-
-    //     $user = User::find($id);
-
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-
-    //     if ($request->filled('old_password')) {
-    //         if (Hash::check($request->old_password, $user->password)) {
-    //             $user->update([
-    //                 'password' => Hash::make($request->password)
-    //             ]);
-    //         } else {
-    //             return back()
-    //                 ->withErrors(['old_password' => __('Please enter the correct password')])
-    //                 ->withInput();
-    //         }
-    //     }
-
-    //     if (request()->hasFile('foto')) {
-    //         if($user->foto && file_exists(storage_path('app/public/storage/gambar-barang/' . $user->foto))){
-    //             Storage::delete('app/public/storage/gambar-barang/'.$user->foto);
-    //         }
-
-    //         $file = $request->file('foto');
-    //         $fileName = $file->hashName() . '.' . $file->getClientOriginalExtension();
-    //         $request->foto->move(storage_path('app/public/storage/gambar-barang/'), $fileName);
-    //         $user->foto = $fileName;
-    //     }
-
-
-    //     $user->save();
-
-    //     alert()->success('Berhasil','Data Berhasil Diubah');
-    //     return redirect('/profile');
-    // }
-
     public function update(Request $request, $id)
     {
         $user = User::find($id);
- 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->type = $request->level;
-         
-        $user->save();
+
+        $user = [
+            'name'     => 'required',
+            'email'    => 'required|email:dns',
+            'password' => 'required|',
+            'foto'     => 'image|file|max:3000'
+        ];
+
+        $validasi = $request->validate($user);
+
+        if($request->file('foto'))
+        {
+            if($request->oldFoto) {
+                Storage::delete($request->oldFoto);
+            }
+            $validasi['foto'] = $request->file('foto')->store('gambar-barang');
+        }
+
+        User::where('id', $id)
+              ->update($validasi);
 
         alert()->success('Berhasil','Data Berhasil Diubah');
-        return redirect('/user');
+        return redirect('/profile');
     }
 
     public function destroy($id)
@@ -123,4 +92,30 @@ class UserController extends Controller
         alert()->info('Info','Data Telah Dihapus');
         return redirect('/user');
     }
+
+    // update password
+    public function updatePassword(Request $request)
+{
+        # Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+
+
+        #Match The Old Password
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            alert()->error('Gagal','Password lama salah');
+            return \redirect('/profile');
+        }
+
+
+        #Update the new Password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        alert()->info('Berhasil','Password telah diganti');
+        return \redirect('/profile');
+}
 }
