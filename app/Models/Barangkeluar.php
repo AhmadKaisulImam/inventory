@@ -16,6 +16,7 @@ class Barangkeluar extends Model
         'no_barang_keluar',
         'barang_id',
         'tgl_barang_keluar',
+        'harga',
         'jml_barang_keluar',
         'total',
     ];

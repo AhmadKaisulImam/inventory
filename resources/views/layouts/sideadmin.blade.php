@@ -4,56 +4,37 @@
         </span>
         <h4 class="text-section">Master Data</h4>
     </li>
-    <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('user') ? 'active' : '' }}">
+        <a href="/user">
+            <i class="fas fa-list-alt"></i>
+            <p>user</p>
+        </a>
+    </li> --}}
+    <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }} {{ Request::is('kategori/create') ? 'active' : '' }}">
         <a href="/kategori">
             <i class="fas fa-list-alt"></i>
-            <p>Data Kategori</p>
+            <p>Kategori</p>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('supplier') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('supplier') ? 'active' : '' }} {{ Request::is('supplier/create') ? 'active' : '' }}">
         <a href="/supplier">
             <i class="fas fa-shipping-fast"></i>
-            <p>Data Supplier</p>
+            <p>Supplier</p>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('barang') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('barang') ? 'active' : '' }} {{ Request::is('barang/create') ? 'active' : '' }}">
         <a href="/barang">
             <i class="fas fa-box-open"></i>
-            <p>Data Barang</p>
+            <p>Stok Barang</p>
         </a>
     </li>
-    {{-- <li class="nav-item {{ Request::is('kategori' , 'barang' , 'supplier') ? 'active' : '' }}">
-        <a data-toggle="collapse" href="#base">
-            <i class="fas fa-layer-group"></i>
-            <p>Data Master</p>
-            <span class="caret"></span>
+    <li class="nav-item {{ Request::is('barang_rusak') ? 'active' : '' }}">
+        <a href="/barang_rusak">
+            <i class="fas fa-window-close"></i>
+            <p>Barang Rusak</p>
         </a>
-        <div class="collapse" id="base">
-            <ul class="nav nav-collapse">
-                <li class="{{ Request::is('user') ? 'active' : '' }}">
-                    <a href="/user">
-                        <span class="sub-item">Data User</span>
-                    </a>
-                </li>
-                <li class="{{ Request::is('kategori') ? 'active' : '' }}">
-                    <a href="/kategori">
-                        <span class="sub-item">Data Kategori</span>
-                    </a>
-                </li>
-                <li class="{{ Request::is('supplier') ? 'active' : '' }}">
-                    <a href="/supplier">
-                        <span class="sub-item">Data Supplier</span>
-                    </a>
-                </li>
-                <li class="{{ Request::is('barang') ? 'active' : '' }}">
-                    <a href="/barang">
-                        <span class="sub-item">Data Barang</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li> --}}
-    <li class="nav-item">
+    </li>
+    {{-- <li class="nav-item">
         <a data-toggle="collapse" href="#laporan">
             <i class="fas fa-file-alt"></i>
             <p>Data Laporan</p>
@@ -88,30 +69,6 @@
                 </li>
             </ul>
         </div>
-    </li>
-    {{-- <li class="nav-item {{ Request::is('user') ? 'active' : '' }}">
-        <a href="/user">
-            <i class="fa fa-user"></i>
-            <p>Data User</p>
-        </a>
-    </li>
-    <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }}">
-        <a href="/kategori">
-            <i class=" fa fa-file"></i>
-            <p>Data Kategori</p>
-        </a>
-    </li>
-    <li class="nav-item {{ Request::is('barang') ? 'active' : '' }}">
-        <a href="/barang">
-            <i class=" fa fa-file"></i>
-            <p>Data Barang</p>
-        </a>
-    </li>
-    <li class="nav-item {{ Request::is('supplier') ? 'active' : '' }}">
-        <a href="/supplier">
-            <i class=" fa fa-file"></i>
-            <p>Data Supplier</p>
-        </a>
     </li> --}}
     <li class="nav-section">
         <span class="sidebar-mini-icon">
@@ -125,13 +82,19 @@
             <p>Barang Masuk</p>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('barang_keluar') ? 'active' : '' }} {{ Request::is('barang_keluar') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('barang_keluar') ? 'active' : '' }} {{ Request::is('barang_keluar/create') ? 'active' : '' }}">
         <a href="/barang_keluar">
             <i class="fas fa-reply"></i>
             <p>Barang Keluar</p>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('sampah') ? 'active' : '' }} {{ Request::is('sampah') ? 'active' : '' }}">
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <hr>
+    </li>
+    <li class="nav-item {{ Request::is('sampah') ? 'active' : '' }} {{ Request::is('sampah_supplier') ? 'active' : '' }} {{ Request::is('sampah_brg') ? 'active' : '' }} {{ Request::is('sampah_brgmasuk') ? 'active' : '' }} {{ Request::is('sampah_brgkeluar') ? 'active' : '' }}">
         <a href="/sampah">
             <i class="fas fa-trash-alt"></i>
             <p>Sampah</p>

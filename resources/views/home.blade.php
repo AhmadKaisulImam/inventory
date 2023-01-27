@@ -87,7 +87,7 @@
                         <div class="card-header">
                             <div class="card-title">Barang Masuk Hari Ini</div>
                             <div class="card-category d-flex justify-content-between">
-                                <h2>{{ date('d F Y') }} :</h2>
+                                <h2>{{ $today }} :</h2>
                                 <h2>{{ $barang_masuk_today }}</h2>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                         <div class="card-header">
                             <div class="card-title">Barang Keluar Hari Ini</div>
                             <div class="card-category d-flex justify-content-between">
-                                <h2>{{ date('d F Y') }}</h2>
+                                <h2>{{ $today }}</h2>
                                 <h2>{{ $barang_keluar_today }}</h2>
                             </div>
                         </div>

@@ -38,6 +38,15 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Seri</label>
+                                <input type="text" name="seri" id="seri" value="{{ old('seri') }}" class="form-control @error('seri') is-invalid @enderror" required autofocus autocomplete="off" placeholder="Masukan Nama . . . ">
+                                @error('seri')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('barang_id');
             $table->foreignId('supplier_id');
             $table->timestamp('tgl_barang_masuk');
+            $table->string('harga');
             $table->integer('jml_barang_masuk');
             $table->bigInteger('total');
             $table->timestamps();

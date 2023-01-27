@@ -14,10 +14,13 @@ class Barang extends Model
 
     protected $fillable = [
         'nama_barang',
+        'no_seri',
         'category_id',
         'harga_beli',
         'harga_jual',
         'stok',
+        'image',
+        'deskripsi',
         'created_at',
         'updated_at',
     ];
@@ -35,6 +38,21 @@ class Barang extends Model
     public function Barangkeluar()
     {
         return $this->hasMany(Barangkeluar::class);
+    }
+
+    public function BarangRusak()
+    {
+        return $this->hasMany(BarangRusak::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($model) {
+            $model->no_seri = Barang::where('category_id', $model->category_id)->max('no_seri') + 1;
+        });
+
     }
 
     const CREARED_AT = 'created_at';

@@ -94,6 +94,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="image">Pilih Gambar Barang</label>
+                                <img class="img-preview img-fluid mb-3 col-sm-3">
+                                <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" onchange="previewImage()" placeholder="Masukan Gambar Barang. . . ">
+                                @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <input type="text" name="deskripsi" value="{{ old('deskripsi') }}" class="form-control @error('deskripsi') is-invalid @enderror" required autocomplete="off" placeholder="Masukan Deskripsi Barang. . . ">
+                                @error('deskripsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
@@ -105,5 +124,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
 
 @endsection

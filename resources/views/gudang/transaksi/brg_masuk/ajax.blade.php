@@ -6,7 +6,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Rp</span>
             </div>
-            <input type="text" class="form-control" id="harga" value="{{ $b->harga_beli }}" required readonly>
+            <input type="text" name="harga" class="form-control" id="harga" value="{{ $b->harga_beli }}" required readonly>
         </div>
     </div>
     

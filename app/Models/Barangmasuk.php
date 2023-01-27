@@ -17,6 +17,7 @@ class Barangmasuk extends Model
         'barang_id',
         'supplier_id',
         'tgl_barang_masuk',
+        'harga',
         'jml_barang_masuk',
         'total',
     ];

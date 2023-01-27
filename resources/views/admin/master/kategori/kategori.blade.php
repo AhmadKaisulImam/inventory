@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <a class="btn btn-primary" href="/kategori/create">
+                                <a class="btn btn-success" href="/kategori/create">
                                     <i class="fa fa-plus"></i>
                                 </a>
                                 <h4 class="card-title"><b>Data Kategori</b></h4>
@@ -30,9 +30,9 @@
                                     <i class="fas fa-file-export"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Excel</a>
-                                        <a class="dropdown-item" href="#">PDF</a>
-                                        <a class="dropdown-item" href="#">CSV</a>
+                                        <a class="dropdown-item" href="/laporan_kategori">PDF</a>
+                                        <a class="dropdown-item" href="/kategori/export">Excel</a>
+                                        <a class="dropdown-item" href="/kategori/exportcsv">CSV</a>
                                     </div>
                                 </div>
                             </div>
@@ -44,6 +44,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama kategori</th>
+                                            <th>Seri</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $u->nama_kategori }}</td>
+                                            <td>{{ $u->seri }}</td>
                                             <td>
                                                 <a href="/kategori/{{ $u->id }}/edit" class="btn btn-warning btn-xs" title="Edit">
                                                     <i class="fa fa-edit"></i>
@@ -76,10 +78,10 @@
 {{-- Modal --}}
 @foreach ($kategori as $h)
 <div class="modal fade" id="hapusKategori{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori</h5>
+            <div class="modal-header bg-warning">
+                <h1 class="modal-title" id="exampleModalLongTitle"><b>Hapus Kategori</b></h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -92,14 +94,14 @@
 
                 <input type="hidden" name="id" value="{{ $h->id }}" required>
                 <div class="form-group">
-                    <h4>Apakah Anda Akan Yakin Akan Menghapus?</h4>
+                    <h2><b>Data akan dibuang ke sampah?</b></h2>
                 </div>
 
             </div>
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
-                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
             </div>
             </form>
         </div>

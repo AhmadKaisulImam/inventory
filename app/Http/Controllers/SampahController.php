@@ -6,8 +6,10 @@ use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Barangmasuk;
+use App\Models\BarangRusak;
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SampahController extends Controller
 {
@@ -16,6 +18,7 @@ class SampahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function trash_kategori()
     {
         $kategori = Category::onlyTrashed()->get();
@@ -29,6 +32,13 @@ class SampahController extends Controller
         $barang = Barang::onlyTrashed()->get();
 
         return \view('admin.master.sampah.sampah_brg', \compact('kategori', 'barang'));
+    }
+
+    public function trash_brgrusak()
+    {
+        $barang_rusak = BarangRusak::onlyTrashed()->get();
+
+        return \view('admin.master.sampah.sampah_brgrusak', \compact('barang_rusak'));
     }
 
     public function trash_supplier()
@@ -66,6 +76,14 @@ class SampahController extends Controller
 
         \toast()->success('Berhasil', 'Data berhasil Di Restore');
         return \redirect('/sampah_brg');
+    }
+
+    public function restorebrgrusak($id)
+    {
+        $barang_rusak = BarangRusak::withTrashed()->where('id', $id)->restore();
+
+        \toast()->success('Berhasil', 'Data berhasil Di Restore');
+        return \redirect('/sampahbrgrusak');
     }
 
     public function restoresupplier($id)
@@ -113,69 +131,40 @@ class SampahController extends Controller
         return \redirect('/sampah_brgkeluar');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function delete_kategori($id)
     {
-        //
+        $kategori = Category::withTrashed()->where('id', $id)->forceDelete();
+
+        \toast()->success('Berhasil', 'Data telah Dihapus');
+        return \redirect('/sampah');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function delete_supplier($id)
     {
-        //
+        $supplier = Supplier::withTrashed()->where('id', $id)->forceDelete();
+
+        \toast()->success('Berhasil', 'Data telah Dihapus');
+        return \redirect('/sampah_supplier');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function delete_barang(Barang $barang, $id)
     {
-        //
+        if($barang->image) {
+            Storage::delete($barang->image);
+        }
+
+        $barang = Barang::withTrashed()->where('id', $id)->forceDelete();
+
+        \toast()->success('Berhasil', 'Data telah Dihapus');
+        return \redirect('/sampah_brg');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delete_brgrusak($id)
     {
-        //
-    }
+        $barang_rusak = BarangRusak::withTrashed()->where('id', $id)->forceDelete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        \toast()->success('Berhasil', 'Data telah Dihapus');
+        return \redirect('/sampahbrgrusak');
     }
 }

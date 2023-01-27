@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('stok');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

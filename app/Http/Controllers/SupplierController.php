@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SupplierExport;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SupplierController extends Controller
 {
@@ -28,7 +30,7 @@ class SupplierController extends Controller
     {
         $validasi = $request->validate([
             'nama_supplier' => 'required|min:6|max:256',
-            'alamat'        => 'required|unique:supplier|min:8|max:256',
+            'alamat'        => 'required|min:8|max:256',
             'nomor_telp'    => 'required|unique:supplier|min:11|max:13',
             'email'         => 'required|unique:supplier|email:dns|max:256'
         ]);
@@ -75,6 +77,16 @@ class SupplierController extends Controller
 
         \toast()->info('Info','Data Telah Dihapus');
         return redirect('/supplier');
+    }
+
+    // export excel csv
+    public function export()
+    {
+        return Excel::download(new SupplierExport, 'supplier.xlsx');
+    }
+    public function exportcsv()
+    {
+        return Excel::download(new SupplierExport, 'supplier.csv');
     }
 
 }

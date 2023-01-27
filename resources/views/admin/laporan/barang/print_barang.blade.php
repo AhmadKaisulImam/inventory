@@ -27,7 +27,7 @@
                             <td align="center">
                                 <span style="line-height: 1.6; font-weight: bold;">
                                     SISTEM INVENTORY BARANG
-                                    <br>WEBANE
+                                    <br>WEBANE INDONESIA
                                 </span>
                             </td>
                         </tr>
@@ -37,6 +37,9 @@
                     <p align="center">
                        <b>LAPORAN DATA BARANG</b>
                     </p>
+                    <p align="right">
+                       <b>Hari/Tanggal : {{ $today }}</b>
+                    </p>
 
                     <hr>
 
@@ -45,7 +48,8 @@
                             <th>No</th>
                             <th>Name Barang</th>
                             <th>Kategori</th>
-                            <th>Harga</th>
+                            <th>Harga Beli</th>
+                            <th>Harga Jual</th>
                             <th>Stok</th>
                         </tr>
 
@@ -55,7 +59,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->nama_barang }}</td>
                                 <td>{{ $row->category->nama_kategori }}</td>
-                                <td>Rp. {{ number_format($row->harga) }}</td>
+                                <td>Rp. {{ number_format($row->harga_beli) }}</td>
+                                <td>Rp. {{ number_format($row->harga_jual) }}</td>
                                 <td>{{ $row->stok }} Unit</td>
                             </tr>
 

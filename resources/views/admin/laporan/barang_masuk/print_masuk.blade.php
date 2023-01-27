@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Cetak Laporan User</title>
+    <title>Cetak Laporan Barang Masuk</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,10 +35,10 @@
 
                     <hr class="line-title">
                     <p align="center">
-                        LAPORAN DATA BARANG MASUK
+                       <b>LAPORAN DATA BARANG MASUK</b>
                     </p>
                     <p class="text-center">
-                        Periode {{ date('d F Y', strtotime($tgl_mulai)) }} s/d {{ date('d F Y', strtotime($tgl_selesai)) }}
+                      <b>Periode {{ date('d F Y', strtotime($tgl_mulai)) }} s/d {{ date('d F Y', strtotime($tgl_selesai)) }}</b>
                     </p>
 
                     <hr>
@@ -48,7 +48,7 @@
                             <th>No</th>
                             <th>No Barang Masuk</th>
                             <th>Name Barang</th>
-                            <th>Kategori</th>
+                            <th>Supplier</th>
                             <th>Tanggal Masuk</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
@@ -68,7 +68,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $b->no_barang_masuk }}</td>
                             <td>{{ $b->nama_barang }}</td>
-                            <td>{{ $b->nama_kategori }}</td>
+                            <td>{{ $b->nama_supplier }}</td>
                             <td>{{ date('d F Y', strtotime($b->tgl_barang_masuk)) }}</td>
                             <td>Rp. {{ number_format($b->harga) }}</td>
                             <td>{{ $b->jml_barang_masuk }} Unit</td>

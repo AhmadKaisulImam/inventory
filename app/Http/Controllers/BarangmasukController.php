@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Barangmasuk;
 use Illuminate\Http\Request;
+use App\Exports\BarangmasukExport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -81,20 +83,12 @@ class BarangmasukController extends Controller
 
     public function store(Request $request)
     {
-        // Barangmasuk::create([
-        //     'no_barang_masuk'   => $request->no_barang_masuk,
-        //     'supplier_id'       => $request->supplier_id,
-        //     'barang_id'         => $request->barang_id,
-        //     'tgl_barang_masuk'  => $request->tgl_barang_masuk,
-        //     'jml_barang_masuk'  => $request->jml_barang_masuk,
-        //     'total'             => $request->total,
-        // ]);
-
         $validasi = $request->validate([
             'no_barang_masuk'   => 'required',
             'supplier_id'       => 'required',
             'barang_id'         => 'required',
             'tgl_barang_masuk'  => 'required',
+            'harga'             => 'required',
             'jml_barang_masuk'  => 'required|min:1',
             'total'             => 'required',
         ]);
@@ -125,5 +119,16 @@ class BarangmasukController extends Controller
 
         toast()->warning('Berhasil','Data Telah Dihapus');
         return redirect('/barang_masuk');
+    }
+
+    // eksport excel & csv
+    public function export(Request $request)
+    {
+        return (new BarangmasukExport($request->tgl_mulai, $request->tgl_selesai))->download('laporanmasuk.xlsx');
+    }
+
+    public function exportcsv(Request $request)
+    {
+        return (new BarangmasukExport($request->tgl_mulai, $request->tgl_selesai))->download('laporanmasuk.csv');
     }
 }

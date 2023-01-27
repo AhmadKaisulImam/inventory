@@ -25,18 +25,18 @@
 	<link rel="stylesheet" href="/assets/css/azzara.css">
 
 </head>
-<body>
+<body data-background-color="bg1">
 	<div class="wrapper">
 		<!--
 			"blue | purple | light-blue | green | orange | red"
 		-->
-		<div class="main-header" data-background-color="blue">
+		<div class="main-header" data-background-color="dark">
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
-				{{-- <a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
-                    <img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
-                </a> --}}
+				<a href="{{ auth()->user()->type == 'admin' ? '/home' : '/gudang' }}" class="logo">
+                    <img src="assets/img/webane.svg" alt="navbar brand" style="width: 90%; height: 90%" class="navbar-brand">
+                </a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
 						<i class="fa fa-bars"></i>

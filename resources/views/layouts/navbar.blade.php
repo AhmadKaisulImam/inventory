@@ -32,7 +32,7 @@
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> My Profile</a>
+                        <a class="dropdown-item" href="/profile"><i class="fa fa-user"></i> My Profile</a>
                         <div class="dropdown-divider"></div>
                         <form action="/logout" method="post">
                             @csrf

@@ -56,8 +56,9 @@ class LoginController extends Controller
                 return redirect()->route('home');
             }
         }else{
-            return redirect()->route('login')
-                ->with('error','Email dan Password Salah');
+            // return redirect()->route('login')->with('loginError','Email dan Password Salah');
+            \alert()->error('Gagal Login', 'Email atau Password Salah');
+            return redirect()->route('login');
         }
           
     }

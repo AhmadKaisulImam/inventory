@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Barangmasuk;
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\Barangmasuk;
 use Illuminate\Http\Request;
+use App\Exports\BarangExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 date_default_timezone_set('Asia/Jakarta');
@@ -44,11 +47,17 @@ class BarangController extends Controller
             'harga_beli'   => 'required',
             'harga_jual'   => 'required',
             'stok'         => 'required',
+            'deskripsi'    => 'required',
+            'image'        => 'image|file|max:2048',
         ]);
+
+        if($request->file('image')) {
+            $validasi['image'] = $request->file('image')->store('gambar-barang');
+        }
 
         Barang::create($validasi);
 
-        \toast()->success('Berhasil','Data Berhasil Ditambahkan');
+        \alert()->success('Berhasil','Data Berhasil Ditambahkan');
         return redirect('/barang');
     }
 
@@ -70,30 +79,43 @@ class BarangController extends Controller
             'harga_beli'   => 'required',
             'harga_jual'   => 'required',
             'stok'         => 'required',
+            'image'        => 'image|file|max:2048',
+            'deskripsi'    => 'required',
         ];
 
         $validasi = $request->validate($barang);
 
+        if($request->file('image')) {
+            if($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validasi['image'] = $request->file('image')->store('gambar-barang');
+        }
+
         Barang::where('id', $id)
               ->update($validasi);
 
-        \toast()->success('Berhasil','Data Berhasil Diubah');
+        \alert()->success('Berhasil','Data Berhasil Diubah');
         return redirect('/barang');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $barang = Barang::find($id);
  
         $barang->delete();
 
-        \toast()->info('Info','Data Telah Dihapus');
+        \alert()->info('Info','Data Telah Dihapus');
         return redirect('/barang');
+    }
+
+    // export excel csv
+    public function export()
+    {
+        return Excel::download(new BarangExport, 'barang.xlsx');
+    }
+    public function exportcsv()
+    {
+        return Excel::download(new BarangExport, 'barang.csv');
     }
 }

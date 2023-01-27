@@ -35,8 +35,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>No Barang Masuk</th>
-                                            <th>Name Barang</th>
-                                            <th>Kategori</th>
+                                            <th>Nama Barang</th>
+                                            <th>Supplier</th>
                                             <th>Tanggal Masuk</th>
                                             <th>Harga</th>
                                             <th>Jumlah</th>
@@ -48,8 +48,9 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $b->no_barang_masuk }}</td>
-                                            <td>{{ $b->nama_barang }}</td>
-                                            <td>{{ $b->nama_kategori }}</td>
+                                            {{-- <td>{{ $b->category->seri }}-{{ str_pad($b->barang->no_seri, 5, '0', STR_PAD_LEFT) }}</td> --}}
+                                            <td>{{ $b->barang->nama_barang }}</td>
+                                            <td>{{ $b->supplier->nama_supplier }}</td>
                                             <td>{{ date('d F Y', strtotime($b->tgl_barang_masuk)) }}</td>
                                             <td>Rp. {{ number_format($b->harga) }}</td>
                                             <td>{{ $b->jml_barang_masuk }} Unit</td>

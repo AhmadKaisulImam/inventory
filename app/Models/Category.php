@@ -13,12 +13,18 @@ class Category extends Model
     protected $table = 'kategori';
 
     protected $fillable = [
-        'nama_kategori'
+        'nama_kategori',
+        'seri'
     ];
 
     public function barang()
     {
         return $this->hasMany(Barang::class);
+    }
+
+    public function category()
+    {
+        return $this->hasMany(BarangRusak::class);
     }
 
     const CREARED_AT = 'created_at';

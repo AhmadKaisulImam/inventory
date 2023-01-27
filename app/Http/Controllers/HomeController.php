@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Supplier;
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $barang = Barang::count();
 
         $date = date('Y-m-d');
+        $today = Carbon::now()->isoFormat('dddd, D MMMM Y');
 
         $total_keluar           = Barangkeluar::where('tgl_barang_keluar', '=', $date)->sum('total');
         $total_masuk            = Barangmasuk::where('tgl_barang_masuk', '=', $date)->sum('total');
@@ -70,7 +72,7 @@ class HomeController extends Controller
         $keluar12 = Barangkeluar::whereMonth('tgl_barang_keluar', '12')->sum('jml_barang_keluar');
 
         return view('home', compact('supplier','total_masuk','total_keluar','kategori','barang','barang_masuk_today','barang_keluar_today',
-                                    'barang_masuk', 'barang_keluar',
+                                    'barang_masuk', 'barang_keluar','today',
                                     'masuk1', 'masuk2', 'masuk3', 'masuk4', 'masuk5', 'masuk6', 
                                     'masuk7', 'masuk8', 'masuk9', 'masuk10', 'masuk11', 'masuk12',
                                     'keluar1', 'keluar2', 'keluar3', 'keluar4', 'keluar5', 'keluar6', 

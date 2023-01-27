@@ -60,6 +60,9 @@
                                                 <a href="/sampahsupplier/{{ $s->id }}/restoresupplier" class="btn btn-warning btn-xs" title="Restore">
                                                     Restrore
                                                 </a>
+                                                <a href="#hapusSupplier{{ $s->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -74,4 +77,37 @@
     </div>
 </div>
 
+{{-- Modal --}}
+@foreach ($supplier as $h)
+<div class="modal fade" id="hapusSupplier{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h1 class="modal-title" id="exampleModalLongTitle"><b>Hapus Data Supplier</b></h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="GET" enctype="multipart/form-data" action="/sampah/{{ $h->id }}/delete_supplier">
+            @csrf
+
+            <div class="modal-body">
+
+                <input type="hidden" name="id" value="{{ $h->id }}" required>
+                <div class="form-group">
+                    <h2><b>Data akan dihapus permanen?</b></h2>
+                </div>
+
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection

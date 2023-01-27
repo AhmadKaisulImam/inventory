@@ -6,7 +6,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Lapoean Data Barang</h4>
+                <h4 class="page-title">Laporan Data Barang</h4>
                 <ul class="breadcrumbs">
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>

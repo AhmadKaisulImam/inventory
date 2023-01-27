@@ -42,6 +42,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name kategori</th>
+                                            <th>Seri</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -50,9 +51,13 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $k->nama_kategori }}</td>
+                                            <td>{{ $k->seri }}</td>
                                             <td>
                                                 <a href="/sampah/{{ $k->id }}/restore" class="btn btn-warning btn-xs" title="Restore">
                                                     Restrore
+                                                </a>
+                                                <a href="#hapusKategori{{ $k->id }}" data-toggle="modal" class="btn btn-danger btn-xs" title="Hapus">
+                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -71,7 +76,7 @@
 {{-- Modal --}}
 @foreach ($kategori as $h)
 <div class="modal fade" id="hapusKategori{{ $h->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori</h5>
@@ -80,7 +85,7 @@
                 </button>
             </div>
 
-            <form method="GET" enctype="multipart/form-data" action="/kategori/{{ $h->id }}/destroy">
+            <form method="GET" enctype="multipart/form-data" action="/sampah/{{ $h->id }}/delete_kategori">
             @csrf
 
             <div class="modal-body">

@@ -1,16 +1,5 @@
 /*!
 
- =========================================================
- * Azzara Bootstrap Dashboard (Bootstrap 4)
- =========================================================
-
- * Product Page: http://www.themekita.com/
- * Copyright 2018 Theme Kita (http://www.themekita.com/)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 [Table of contents]
 
 * Background
@@ -102,6 +91,10 @@ body[data-background-color="bg2"] {
 
 body[data-background-color="bg3"] {
     background: #f1f1f1;
+}
+
+body[data-background-color="bg4"] {
+    background: #c77c7c;
 }
 
 
@@ -672,7 +665,7 @@ body {
 
 .sidebar .nav>.nav-item.active>a {
     color: #575962 !important;
-    background: #007bff;
+    background: #282A3C;
     border-radius: 5px;
 }
 
@@ -1536,6 +1529,14 @@ body {
 
 .main-header[data-background-color="red"] .navbar-header {
     background: #f3545d !important;
+}
+
+.main-header[data-background-color="pink"] {
+    background: #f354b6 !important;
+}
+
+.main-header[data-background-color="pink"] .navbar-header {
+    background: #f354b6 !important;
 }
 
 .avatar {

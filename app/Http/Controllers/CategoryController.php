@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CategoryExport;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -33,12 +34,13 @@ class CategoryController extends Controller
     {
 
         $validasi =  $request->validate([
-            'nama_kategori' => 'required|unique:kategori|min:4'
+            'nama_kategori' => 'required|unique:kategori|min:4',
+            'seri'          => 'required|unique:kategori|min:2'
         ]);
 
         Category::create($validasi);
 
-        toast()->success('Berhasil','Data Telah Ditambahkan');
+        alert()->success('Berhasil','Data Telah Ditambahkan');
         return redirect('/kategori');
 
     }
@@ -56,7 +58,8 @@ class CategoryController extends Controller
         $kategori = Category::find($id);
  
         $kategori = [
-            'nama_kategori' => 'required|unique:kategori|min:4'
+            'nama_kategori' => 'required|min:4',
+            'seri'          => 'required|min:2'
         ];
 
         $validasi = $request->validate($kategori);
@@ -64,7 +67,7 @@ class CategoryController extends Controller
         Category::where('id', $id)
                 ->update($validasi);
                 
-        \toast()->success('Berhasil','Data Berhasil Diubah');
+        \alert()->info('Berhasil','Data Berhasil Diubah');
         return redirect('/kategori');
     }
 
@@ -75,7 +78,17 @@ class CategoryController extends Controller
         // $kategori->barang()->delete();
         $kategori->delete();
 
-        \toast()->info('Info','Data Telah Dihapus');
+        alert()->warning('Info','Data Telah Dibuang kesampah');
         return redirect('/kategori');
+    }
+
+    // eksport excel & csv
+    public function export()
+    {
+        return Excel::download(new CategoryExport, 'kategori.xlsx');
+    }
+    public function exportcsv()
+    {
+        return Excel::download(new CategoryExport, 'kategori.csv');
     }
 }
