@@ -106,7 +106,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
-                                <input type="text" name="deskripsi" value="{{ old('deskripsi') }}" class="form-control @error('deskripsi') is-invalid @enderror" required autocomplete="off" placeholder="Masukan Deskripsi Barang. . . ">
+                                <input type="text" name="deskripsi" value="{{ old('deskripsi') }}" class="form-control @error('deskripsi') is-invalid @enderror" autocomplete="off" placeholder="Masukan Deskripsi Barang. . . ">
                                 @error('deskripsi')
                                     <div class="invalid-feedback">
                                         {{ $message }}

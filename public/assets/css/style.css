@@ -75,7 +75,7 @@ danger-color : #f3545d
 -------------------------------------------------------------------*/
 
 
-/* 	 Background Body */
+/* 	Warna Background Body */
 
 body {
     background: #f9fbfd;
@@ -663,6 +663,9 @@ body {
     display: list-item;
 }
 
+
+/* Warna side bar */
+
 .sidebar .nav>.nav-item.active>a {
     color: #575962 !important;
     background: #282A3C;
@@ -682,7 +685,7 @@ body {
 }
 
 .sidebar .nav>.nav-item.submenu>li>a i {
-    color: rgba(23, 125, 255, 0.76);
+    color: #282A3C;
 }
 
 .sidebar .nav>.nav-item>a:hover,
@@ -1474,6 +1477,9 @@ body {
 .main-header[data-background-color] .navbar-header .navbar-nav .nav-item.active .nav-link {
     background: rgba(31, 30, 30, 0.12) !important;
 }
+
+
+/* Warna header */
 
 .main-header[data-background-color="dark"] {
     background: #282a3c !important;

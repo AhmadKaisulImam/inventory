@@ -46,7 +46,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $u->nama_barang }}</td>
                                             <td>{{ $u->category->nama_kategori }}</td>
-                                            <td>Rp. {{ number_format($u->harga) }}</td>
+                                            <td>Rp. {{ number_format($u->harga_beli) }}</td>
                                             <td>{{ $u->stok }} Unit</td>
                                         </tr>
                                         @endforeach

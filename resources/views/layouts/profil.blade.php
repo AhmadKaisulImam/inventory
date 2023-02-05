@@ -27,13 +27,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Nama Lengkap</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ Auth::user()->name }}">
+                                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ Auth::user()->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Name" value="{{ Auth::user()->email }}">
+                                        <input type="email" class="form-control" name="email" placeholder="Name" value="{{ Auth::user()->email }}" readonly>
                                     </div>
                                 </div>
                             </div>
